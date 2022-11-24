@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Menu, Transition } from "@headlessui/react";
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment } from "react";
 import logo from "../images/swap.JPG";
+import { AuthContext } from "../Contexts/AuthProvider";
 
 const Header = () => {
+  const { user, logOut } = useContext(AuthContext);
   return (
     <div className="h-20 px-7 flex justify-between items-center bg-[#2b2d42]">
       <div className="px-5 flex uppercase gap-2 items-center text-white py-2 rounded-xl w-20 text-xl font-bold">
@@ -14,20 +16,36 @@ const Header = () => {
         </h1>
       </div>
       <div className="flex items-center justify-end">
-        <div className="text-[#edf2f4]">
-          <Link
-            to="/login"
-            className="px-3 duration-300 hover:bg-[#edf2f4] hover:text-[#d90429] py-2 rounded-xl bg-[#ef233c] text-lg font-semibold"
-          >
-            Login
-          </Link>
-          <Link
-            to="/sign-up"
-            className="px-3 mx-2 bg-[#edf2f4] py-2 duration-300 hover:text-[#edf2f4] text-[#d90429] rounded-xl hover:bg-[#ef233c] text-lg font-semibold"
-          >
-            Sign Up
-          </Link>
-        </div>
+        {user?.uid ? (
+          <>
+            <img
+              className="w-12 rounded-full h-12 border-2 border-white mr-5"
+              src={user?.photoURL}
+              alt=""
+            />
+            <button
+              onClick={() => logOut()}
+              className="px-3 duration-300 hover:bg-[#edf2f4] hover:text-[#d90429] py-2 rounded-xl bg-[#ef233c] text-lg font-semibold"
+            >
+              Logout
+            </button>
+          </>
+        ) : (
+          <div className="text-[#edf2f4]">
+            <Link
+              to="/login"
+              className="px-3 duration-300 hover:bg-[#edf2f4] hover:text-[#d90429] py-2 rounded-xl bg-[#ef233c] text-lg font-semibold"
+            >
+              Login
+            </Link>
+            <Link
+              to="/sign-up"
+              className="px-3 mx-2 bg-[#edf2f4] py-2 duration-300 hover:text-[#edf2f4] text-[#d90429] rounded-xl hover:bg-[#ef233c] text-lg font-semibold"
+            >
+              Sign Up
+            </Link>
+          </div>
+        )}
         <div className="inline relative max-w-56 text-right">
           <Menu as="div" className=" text-left">
             <div className="flex justify-end">
@@ -55,7 +73,7 @@ const Header = () => {
                             : "text-[#d90429]"
                         } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                       >
-                        Edit
+                        Home
                       </button>
                     )}
                   </Menu.Item>

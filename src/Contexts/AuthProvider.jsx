@@ -8,8 +8,9 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
-const AuthContext = createContext();
+export const AuthContext = createContext();
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 const AuthProvider = ({ children }) => {
@@ -25,12 +26,19 @@ const AuthProvider = ({ children }) => {
   };
   const logOut = () => {
     setLoading(true);
-    localStorage.removeItem("accessToken");
+    localStorage.removeItem("DealX-token");
     return signOut(auth);
   };
   const googleLogin = () => {
     setLoading(true);
     return signInWithPopup(auth, googleProvider);
+  };
+  const updateUserProfile = (name, photo) => {
+    setLoading(true);
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: photo,
+    });
   };
   useEffect(() => {
     const cleanUp = onAuthStateChanged(auth, (createUser) => {
@@ -42,9 +50,11 @@ const AuthProvider = ({ children }) => {
   const value = {
     user,
     loading,
+    setLoading,
     signInWithPass,
     logOut,
     createUser,
+    updateUserProfile,
     googleLogin,
   };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

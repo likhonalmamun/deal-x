@@ -1,18 +1,68 @@
 import { RadioGroup } from "@headlessui/react";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import toast from "react-hot-toast";
+import { useLocation, useNavigate } from "react-router-dom";
+import { saveUserAndGetToken } from "../../Api/saveUser";
+import { AuthContext } from "../../Contexts/AuthProvider";
 
 const SignUp = () => {
-  let [plan, setPlan] = useState("Buyer");
+  const { createUser, user, updateUserProfile, setLoading, googleLogin } =
+    useContext(AuthContext);
+  let [role, setRole] = useState("Buyer");
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   const signUp = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
     const password = e.target.password.value;
     const email = e.target.email.value;
     const image = e.target.image.files[0];
-    console.log(name, password, email, image);
+    const formData = new FormData();
+    formData.append("image", image);
+    fetch(
+      "https://api.imgbb.com/1/upload?key=fb6cc3c6e303eb1ff45d56f923305ae0",
+      { method: "POST", body: formData }
+    )
+      .then((res) => res.json())
+      .then((imgData) => {
+        // console.log(imgData.data.display_url);
+        createUser(email, password).then((result) => {
+          console.log(result.user);
+          updateUserProfile(name, imgData.data.display_url).then((result) => {
+            toast.success("user created successfully");
+            const newUser = {
+              name: name,
+              role: role,
+              email: email,
+              image: imgData.data.display_url,
+              verified: false,
+            };
+            saveUserAndGetToken(newUser);
+          });
+        });
+      })
+      .catch((er) => {
+        toast.error("Failed to upload image !");
+        console.log(er.message);
+      });
+  };
+  const createUserWithGoogle = () => {
+    googleLogin().then((result) => {
+      toast.success("user created successfully");
+      const newUser = {
+        name: result.user.displayName,
+        role: role,
+        email: result.user.email,
+        image: result.user.photoURL,
+        verified: true,
+      };
+      console.log(newUser);
+      saveUserAndGetToken(newUser);
+    });
   };
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div className="min-h-[900px] flex items-center justify-center">
       <div className="min-h-[700px] p-5 bg-[#2b2d42] w-[430px] rounded-xl shadow-xl shadow-[#8d99ae]">
         <form onSubmit={signUp} action="">
           <h1 className="text-3xl mt-3 text-[#d90429] font-bold  text-center">
@@ -55,7 +105,7 @@ const SignUp = () => {
               className="w-full  text-[#d90429] outline-[#d90429] px-3 py-2 rounded-md bg-[#edf2f4]"
               type="file"
             />
-            <RadioGroup className={'mt-3'} value={plan} onChange={setPlan}>
+            <RadioGroup className={"mt-3"} value={role} onChange={setRole}>
               <RadioGroup.Label className="mt-4 font-semibold mb-2 inline-block mr-7">
                 Sign In As :{" "}
               </RadioGroup.Label>
@@ -95,7 +145,10 @@ const SignUp = () => {
           </button>
         </form>
         <h1 className="text-white text-lg text-center font-bold mt-3">OR</h1>
-        <button className="w-full py-2 mt-4 rounded-lg ring-2 ring-[#8d99ae] hover:scale-105 duration-300 bg-[#edf2f4] text-[#2b2d42] text-lg font-bold">
+        <button
+          onClick={createUserWithGoogle}
+          className="w-full py-2 mt-4 rounded-lg ring-2 ring-[#8d99ae] hover:scale-105 duration-300 bg-[#edf2f4] text-[#2b2d42] text-lg font-bold"
+        >
           Continue with Google
         </button>
       </div>
