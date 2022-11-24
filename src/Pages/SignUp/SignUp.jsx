@@ -6,14 +6,21 @@ import { saveUserAndGetToken } from "../../Api/saveUser";
 import { AuthContext } from "../../Contexts/AuthProvider";
 
 const SignUp = () => {
-  const { createUser, user, updateUserProfile, setLoading, googleLogin } =
-    useContext(AuthContext);
+  const {
+    createUser,
+    user,
+    updateUserProfile,
+    loading,
+    setLoading,
+    googleLogin,
+  } = useContext(AuthContext);
   let [role, setRole] = useState("Buyer");
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
   const signUp = (e) => {
     e.preventDefault();
+    setLoading(true);
     const name = e.target.name.value;
     const password = e.target.password.value;
     const email = e.target.email.value;
@@ -27,39 +34,53 @@ const SignUp = () => {
       .then((res) => res.json())
       .then((imgData) => {
         // console.log(imgData.data.display_url);
-        createUser(email, password).then((result) => {
-          console.log(result.user);
-          updateUserProfile(name, imgData.data.display_url).then((result) => {
-            toast.success("user created successfully");
-            const newUser = {
-              name: name,
-              role: role,
-              email: email,
-              image: imgData.data.display_url,
-              verified: false,
-            };
-            saveUserAndGetToken(newUser);
-          });
-        });
+        createUser(email, password)
+          .then((result) => {
+            console.log(result.user);
+            updateUserProfile(name, imgData.data.display_url)
+              .then((result) => {
+                setLoading(true);
+                toast.success("user created successfully");
+                const newUser = {
+                  name: name,
+                  role: role,
+                  email: email,
+                  image: imgData.data.display_url,
+                  verified: false,
+                };
+                saveUserAndGetToken(newUser);
+                setLoading(false);
+                navigate(from);
+              })
+              .catch((er) => toast.error(er.message));
+          })
+          .catch((er) => toast.error(er.message));
       })
       .catch((er) => {
         toast.error("Failed to upload image !");
         console.log(er.message);
+        setLoading(false);
       });
   };
   const createUserWithGoogle = () => {
-    googleLogin().then((result) => {
-      toast.success("user created successfully");
-      const newUser = {
-        name: result.user.displayName,
-        role: role,
-        email: result.user.email,
-        image: result.user.photoURL,
-        verified: true,
-      };
-      console.log(newUser);
-      saveUserAndGetToken(newUser);
-    });
+    googleLogin()
+      .then((result) => {
+        toast.success("user created successfully");
+        const newUser = {
+          name: result.user.displayName,
+          role: role,
+          email: result.user.email,
+          image: result.user.photoURL,
+          verified: true,
+        };
+        console.log(newUser);
+        saveUserAndGetToken(newUser);
+        navigate(from);
+      })
+      .catch((er) => {
+        toast.error(er.message);
+        setLoading(false);
+      });
   };
   return (
     <div className="min-h-[900px] flex items-center justify-center">
@@ -141,7 +162,7 @@ const SignUp = () => {
             type="submit"
             className="w-full py-2 mt-7 hover:bg-[#edf2f4] hover:text-[#d90429] duration-300 rounded-lg bg-[#ef233c] text-[#edf2f4] text-lg font-bold"
           >
-            Sign Up
+            {loading ? "Loading..." : " Sign Up"}
           </button>
         </form>
         <h1 className="text-white text-lg text-center font-bold mt-3">OR</h1>
