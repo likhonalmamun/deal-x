@@ -26,16 +26,21 @@ const AddProduct = () => {
       .then((imgData) => {
         const newProduct = {
           name: e.target.name.value,
+          description: e.target.description.value,
+          condition: e.target.condition.value,
           categoryId: e.target.category.value,
           originalPrice: e.target.originalPrice.value,
           resellPrice: e.target.resellPrice.value,
           yearsUsed: e.target.yearsOfUsed.value,
           location: e.target.location.value,
+          phone: e.target.phone.value,
+          status: "available",
+          reported: false,
+          paid: false,
+          advertized: false,
           img: imgData.data.display_url,
           time: format(new Date(), "Pp"),
-          seller: user.displayName,
           sellerEmail: user.email,
-          sellerVerified: user.emailVerified,
         };
         addProductToDb(newProduct, setLoading);
         setLoading(false);
@@ -54,20 +59,38 @@ const AddProduct = () => {
             Add A Product
           </h1>
           <div className="text-white pt-4">
-            <label className="block mt-4 font-semibold mb-2" htmlFor="">
-              Product Category :
-            </label>
-            <select
-              name="category"
-              required
-              className="select w-full text-[#d90429] outline-[#d90429] px-3 py-2 rounded-md bg-[#edf2f4]"
-            >
-              {categories.map((category) => (
-                <option key={category._id} value={category._id}>
-                  {category.name}
-                </option>
-              ))}
-            </select>
+            <div className="flex gap-6">
+              <div className="w-full">
+                <label className="block mt-4 font-semibold mb-2" htmlFor="">
+                  Product Category :
+                </label>
+                <select
+                  name="category"
+                  required
+                  className="select w-full text-[#d90429] outline-[#d90429] px-3 py-2 rounded-md bg-[#edf2f4]"
+                >
+                  {categories.map((category) => (
+                    <option key={category._id} value={category._id}>
+                      {category.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="w-full">
+                <label className="block mt-4 font-semibold mb-2" htmlFor="">
+                  Product Condition :
+                </label>
+                <select
+                  name="condition"
+                  required
+                  className="select w-full text-[#d90429] outline-[#d90429] px-3 py-2 rounded-md bg-[#edf2f4]"
+                >
+                  <option value="Excellent">Excellent</option>
+                  <option value="Excellent">Good</option>
+                  <option value="Excellent">Fair</option>
+                </select>
+              </div>
+            </div>
             <label className="block mt-4 font-semibold mb-2" htmlFor="">
               Product Name :
             </label>
@@ -101,33 +124,63 @@ const AddProduct = () => {
                 />
               </div>
             </div>
+            <div className="flex gap-6">
+              <div className="w-1/5">
+                <label className="block mt-4 font-semibold mb-2" htmlFor="">
+                  Years of Use :
+                </label>
+                <input
+                  name="yearsOfUsed"
+                  required
+                  className="w-full text-[#d90429] outline-[#d90429] px-3 py-2 rounded-md bg-[#edf2f4]"
+                  type="number"
+                />
+              </div>
+              <div className="flex-1">
+                <label className="block mt-4 font-semibold mb-2" htmlFor="">
+                  Product Image :
+                </label>
+                <input
+                  name="image"
+                  required
+                  className="w-full  text-[#d90429] outline-[#d90429] px-3 py-2 rounded-md bg-[#edf2f4]"
+                  type="file"
+                />
+              </div>
+            </div>
             <label className="block mt-4 font-semibold mb-2" htmlFor="">
-              Years of Use :
+              Product Description :
             </label>
             <input
-              name="yearsOfUsed"
-              required
-              className="w-full text-[#d90429] outline-[#d90429] px-3 py-2 rounded-md bg-[#edf2f4]"
-              type="number"
-            />
-            <label className="block mt-4 font-semibold mb-2" htmlFor="">
-              Product Image :
-            </label>
-            <input
-              name="image"
-              required
-              className="w-full  text-[#d90429] outline-[#d90429] px-3 py-2 rounded-md bg-[#edf2f4]"
-              type="file"
-            />
-            <label className="block mt-4 font-semibold mb-2" htmlFor="">
-              Contact Location :
-            </label>
-            <input
-              name="location"
+              name="description"
               required
               className="w-full text-[#d90429] outline-[#d90429] px-3 py-2 rounded-md bg-[#edf2f4]"
               type="text"
             />
+            <div className="flex gap-6">
+              <div className="w-full">
+                <label className="block mt-4 font-semibold mb-2" htmlFor="">
+                  Contact Location :
+                </label>
+                <input
+                  name="location"
+                  required
+                  className="w-full text-[#d90429] outline-[#d90429] px-3 py-2 rounded-md bg-[#edf2f4]"
+                  type="text"
+                />
+              </div>
+              <div className="w-full">
+                <label className="block mt-4 font-semibold mb-2" htmlFor="">
+                  Phone number :
+                </label>
+                <input
+                  name="phone"
+                  required
+                  className="w-full text-[#d90429] outline-[#d90429] px-3 py-2 rounded-md bg-[#edf2f4]"
+                  type="number"
+                />
+              </div>
+            </div>
           </div>
           <button
             type="submit"

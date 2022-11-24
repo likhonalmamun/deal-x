@@ -45,7 +45,7 @@ const SignUp = () => {
                   role: role,
                   email: email,
                   image: imgData.data.display_url,
-                  verified: result.user.emailVerified,
+                  verified: false,
                 };
                 saveUserAndGetToken(newUser);
                 setLoading(false);
@@ -70,7 +70,7 @@ const SignUp = () => {
           role: role,
           email: result.user.email,
           image: result.user.photoURL,
-          verified: result.user.emailVerified,
+          verified: false,
         };
         console.log(newUser);
         saveUserAndGetToken(newUser);

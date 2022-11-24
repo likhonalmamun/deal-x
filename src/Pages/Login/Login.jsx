@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
-import { newToken } from "../../Api/newToken";
+import { saveUserAndGetToken } from "../../Api/saveUser";
 import { AuthContext } from "../../Contexts/AuthProvider";
 
 const Login = () => {
@@ -19,7 +19,7 @@ const Login = () => {
       .then((result) => {
         setLoading(true);
         toast.success("Logged in successfully !");
-        newToken(result.user.email);
+        saveUserAndGetToken(result.user.email);
         setLoading(false);
         navigate(from);
       })
@@ -34,7 +34,7 @@ const Login = () => {
       .then((result) => {
         setLoading(true);
         toast.success("Logged in successfully !");
-        newToken(result.user.email);
+        saveUserAndGetToken(result.user.email);
         setLoading(false);
         navigate(from);
       })

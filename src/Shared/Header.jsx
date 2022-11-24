@@ -94,50 +94,6 @@ const Header = () => {
                     )}
                   </Menu.Item>
                 </div>
-                <div className="px-1 py-1">
-                  <Menu.Item>
-                    {({ active }) => (
-                      <Link
-                        to="/dashboard/add-product"
-                        className={`${
-                          active
-                            ? "bg-[#ef233c] text-[#edf2f4]"
-                            : "text-[#d90429]"
-                        } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                      >
-                        Add A Product
-                      </Link>
-                    )}
-                  </Menu.Item>
-                  <Menu.Item>
-                    {({ active }) => (
-                      <Link
-                        className={`${
-                          active
-                            ? "bg-[#ef233c] text-[#edf2f4]"
-                            : "text-[#d90429]"
-                        } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                      >
-                        Move
-                      </Link>
-                    )}
-                  </Menu.Item>
-                </div>
-                <div className="px-1 py-1">
-                  <Menu.Item>
-                    {({ active }) => (
-                      <Link
-                        className={`${
-                          active
-                            ? "bg-[#ef233c] text-[#edf2f4]"
-                            : "text-[#d90429]"
-                        } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                      >
-                        Delete
-                      </Link>
-                    )}
-                  </Menu.Item>
-                </div>
               </Menu.Items>
             </Transition>
           </Menu>
