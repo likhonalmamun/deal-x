@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { format } from "date-fns";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../Contexts/AuthProvider";
+import { addProductToDb } from "../../Api/addProduct";
 const AddProduct = () => {
   const { user } = useContext(AuthContext);
   const [categories, setCategories] = useState([]);
@@ -34,8 +35,9 @@ const AddProduct = () => {
           time: format(new Date(), "Pp"),
           seller: user.displayName,
           sellerEmail: user.email,
+          sellerVerified: user.emailVerified,
         };
-        toast.success("Product added successfully");
+        addProductToDb(newProduct, setLoading);
         setLoading(false);
         console.log(newProduct);
       })
