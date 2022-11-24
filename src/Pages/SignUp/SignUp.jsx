@@ -36,9 +36,8 @@ const SignUp = () => {
         // console.log(imgData.data.display_url);
         createUser(email, password)
           .then((result) => {
-            console.log(result.user);
             updateUserProfile(name, imgData.data.display_url)
-              .then((result) => {
+              .then((result2) => {
                 setLoading(true);
                 toast.success("user created successfully");
                 const newUser = {
@@ -46,7 +45,7 @@ const SignUp = () => {
                   role: role,
                   email: email,
                   image: imgData.data.display_url,
-                  verified: false,
+                  verified: result.user.emailVerified,
                 };
                 saveUserAndGetToken(newUser);
                 setLoading(false);
@@ -71,7 +70,7 @@ const SignUp = () => {
           role: role,
           email: result.user.email,
           image: result.user.photoURL,
-          verified: true,
+          verified: result.user.emailVerified,
         };
         console.log(newUser);
         saveUserAndGetToken(newUser);

@@ -7,6 +7,7 @@ import { AuthContext } from "../Contexts/AuthProvider";
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
+  console.log(user);
   return (
     <div className="h-20 px-7 flex justify-between items-center bg-[#2b2d42]">
       <div className="px-5 flex uppercase gap-2 items-center text-white py-2 rounded-xl w-20 text-xl font-bold">
@@ -62,11 +63,12 @@ const Header = () => {
               leaveFrom="transform opacity-100 scale-100"
               leaveTo="transform opacity-0 scale-95"
             >
-              <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-[#ef233c] rounded-md bg-[#edf2f4] shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+              <Menu.Items className="absolute z-10 right-0 mt-2 w-56 origin-top-right divide-y divide-[#ef233c] rounded-md bg-[#edf2f4] shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                 <div className="px-1 py-1 ">
                   <Menu.Item>
                     {({ active }) => (
-                      <button
+                      <Link
+                        to="/"
                         className={`${
                           active
                             ? "bg-[#ef233c] text-[#edf2f4]"
@@ -74,40 +76,42 @@ const Header = () => {
                         } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                       >
                         Home
-                      </button>
+                      </Link>
                     )}
                   </Menu.Item>
                   <Menu.Item>
                     {({ active }) => (
-                      <button
+                      <Link
+                        to="/dashboard"
                         className={`${
                           active
                             ? "bg-[#ef233c] text-[#edf2f4]"
                             : "text-[#d90429]"
                         } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                       >
-                        Duplicate
-                      </button>
+                        Dashboard
+                      </Link>
                     )}
                   </Menu.Item>
                 </div>
                 <div className="px-1 py-1">
                   <Menu.Item>
                     {({ active }) => (
-                      <button
+                      <Link
+                        to="/dashboard/add-product"
                         className={`${
                           active
                             ? "bg-[#ef233c] text-[#edf2f4]"
                             : "text-[#d90429]"
                         } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                       >
-                        Archive
-                      </button>
+                        Add A Product
+                      </Link>
                     )}
                   </Menu.Item>
                   <Menu.Item>
                     {({ active }) => (
-                      <button
+                      <Link
                         className={`${
                           active
                             ? "bg-[#ef233c] text-[#edf2f4]"
@@ -115,14 +119,14 @@ const Header = () => {
                         } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                       >
                         Move
-                      </button>
+                      </Link>
                     )}
                   </Menu.Item>
                 </div>
                 <div className="px-1 py-1">
                   <Menu.Item>
                     {({ active }) => (
-                      <button
+                      <Link
                         className={`${
                           active
                             ? "bg-[#ef233c] text-[#edf2f4]"
@@ -130,7 +134,7 @@ const Header = () => {
                         } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                       >
                         Delete
-                      </button>
+                      </Link>
                     )}
                   </Menu.Item>
                 </div>
