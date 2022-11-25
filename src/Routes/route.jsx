@@ -45,48 +45,32 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashboardLayout></DashboardLayout>,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout></DashboardLayout>
+      </PrivateRoute>
+    ),
     errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/dashboard/add-product",
-        element: (
-          <PrivateRoute>
-            <AddProduct></AddProduct>
-          </PrivateRoute>
-        ),
+        element: <AddProduct></AddProduct>,
       },
       {
         path: "/dashboard/my-products",
-        element: (
-          <PrivateRoute>
-            <MyProducts></MyProducts>
-          </PrivateRoute>
-        ),
+        element: <MyProducts></MyProducts>,
       },
       {
         path: "/dashboard/all-sellers",
-        element: (
-          <PrivateRoute>
-            <AllSellers></AllSellers>
-          </PrivateRoute>
-        ),
+        element: <AllSellers></AllSellers>,
       },
       {
         path: "/dashboard/my-orders",
-        element: (
-          <PrivateRoute>
-            <MyOrders></MyOrders>
-          </PrivateRoute>
-        ),
+        element: <MyOrders></MyOrders>,
       },
       {
         path: "/dashboard/payment",
-        element: (
-          <PrivateRoute>
-            <Payment></Payment>
-          </PrivateRoute>
-        ),
+        element: <Payment></Payment>,
       },
     ],
   },

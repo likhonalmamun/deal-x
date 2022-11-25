@@ -1,31 +1,22 @@
+import userEvent from "@testing-library/user-event";
 import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../Contexts/AuthProvider";
 import BookingModal from "./BookingModal";
 
 const ProductCard = ({ product }) => {
-  const { logOut, user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [seller, setSeller] = useState(null);
   const [open, setOpen] = useState(true);
   useEffect(() => {
-    fetch(
-      `http://localhost:5000/users/${product.sellerEmail}?payload=${user.email}`,
-      {
-        headers: {
-          authorization: `bearer ${localStorage.getItem("DealX-token")}`,
-        },
-      }
-    )
+    fetch(`http://localhost:5000/users/${product.sellerEmail}`)
       .then((res) => res.json())
       .then((data) => {
-        if (data.message) {
-          logOut().then(() => {});
-          toast.error(data.message);
-        } else {
-          setSeller(data);
-        }
-      });
-  }, [product, user, logOut]);
+        setSeller(data);
+      })
+      .catch((er) => toast.error(er.message));
+  }, [product]);
   const reportProduct = () => {
     fetch(`http://localhost:5000/products/${product._id}`, { method: "PATCH" })
       .then((res) => res.json())
@@ -72,12 +63,21 @@ const ProductCard = ({ product }) => {
             </div>
           </div>
           <div>
-            <label
-              htmlFor="booking-modal"
-              className="btn btn-sm  w-28 mb-2 uppercase font-semibold py-1 px-2 bg-black text-white"
-            >
-              book now
-            </label>
+            {user ? (
+              <label
+                htmlFor="booking-modal"
+                className="btn btn-sm  w-28 mb-2 uppercase font-semibold py-1 px-2 bg-black text-white"
+              >
+                book now
+              </label>
+            ) : (
+              <Link
+                className="btn btn-sm  w-28 mb-2 uppercase text-xs py-1 px-2 bg-black text-white"
+                to="/login"
+              >
+                Login To Book
+              </Link>
+            )}
             <button
               onClick={reportProduct}
               className="btn btn-sm block w-28 uppercase font-semibold py-1 px-2 bg-[#ef233c] text-white"

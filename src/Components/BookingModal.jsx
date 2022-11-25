@@ -1,22 +1,22 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Contexts/AuthProvider";
 
 const BookingModal = ({ product, setOpen }) => {
-  const { user } = useContext(AuthContext);
-  const [loading, setLoading] = useState(false);
+  const { user, loading, setLoading } = useContext(AuthContext);
   const navigate = useNavigate();
   const bookProduct = (e) => {
     e.preventDefault();
     setLoading(true);
+
     const booking = {
       product: product.name,
       productImg: product.img,
       productId: product._id,
       price: product.resellPrice,
-      buyer: user.displayName,
-      buyerEmail: user.email,
+      buyer: user?.displayName,
+      buyerEmail: user?.email,
       phone: e.target.phone.value,
       location: e.target.location.value,
     };
@@ -88,7 +88,7 @@ const BookingModal = ({ product, setOpen }) => {
             <input
               name="buyer"
               disabled
-              defaultValue={user.displayName}
+              defaultValue={user?.displayName}
               className="w-full text-[#d90429] outline-[#d90429] px-3 py-2 rounded-md bg-[#edf2f4]"
               type="text"
             />
@@ -98,7 +98,7 @@ const BookingModal = ({ product, setOpen }) => {
             <input
               name="email"
               disabled
-              defaultValue={user.email}
+              defaultValue={user?.email}
               className="w-full text-[#d90429] outline-[#d90429] px-3 py-2 rounded-md bg-[#edf2f4]"
               type="email"
             />

@@ -12,7 +12,7 @@ const Categories = () => {
   return (
     <div className="mt-10 p-5">
       <h1 className="text-2xl font-bold  text-center">Product Categories</h1>
-      <div className="mt-5 grid grid-cols-4 gap-5">
+      <div className="mt-10 grid grid-cols-4 gap-5">
         {categories.map((category) => (
           <Link key={category._id} to={`/category/${category._id}`}>
             <CategoryCard info={category}></CategoryCard>
