@@ -1,13 +1,18 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Contexts/AuthProvider";
 
 const BookingModal = ({ product, setOpen }) => {
   const { user } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const bookProduct = (e) => {
     e.preventDefault();
+    setLoading(true);
     const booking = {
       product: product.name,
+      productImg: product.img,
       productId: product._id,
       price: product.resellPrice,
       buyer: user.displayName,
@@ -25,8 +30,16 @@ const BookingModal = ({ product, setOpen }) => {
       body: JSON.stringify(booking),
     })
       .then((res) => res.json())
-      .then((data) => toast.success(data.success))
-      .catch((er) => toast.error(er.message));
+      .then((data) => {
+        setOpen(false);
+        setLoading(false);
+        toast.success(data.success);
+        navigate("/dashboard/my-orders");
+      })
+      .catch((er) => {
+        setLoading(false);
+        toast.error(er.message);
+      });
   };
   return (
     <>
@@ -114,8 +127,7 @@ const BookingModal = ({ product, setOpen }) => {
             type="submit"
             className="w-full py-2 mt-4 hover:bg-[#edf2f4] hover:text-[#d90429] duration-300 rounded-lg bg-[#ef233c] text-[#edf2f4] text-lg font-bold"
           >
-            Book Now
-            {/* {loading ? "Loading..." : "Login"} */}
+            {loading ? "Loading..." : "Book Now"}
           </button>
         </form>
       </div>

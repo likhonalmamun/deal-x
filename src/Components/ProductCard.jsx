@@ -26,7 +26,12 @@ const ProductCard = ({ product }) => {
         }
       });
   }, [product, user, logOut]);
-
+  const reportProduct = () => {
+    fetch(`http://localhost:5000/products/${product._id}`, { method: "PATCH" })
+      .then((res) => res.json())
+      .then((data) => toast.success(data.success))
+      .catch((er) => toast.error(er.message));
+  };
   return (
     <div className="p-3 rounded-lg border-2 border-[#2b2d42] bg-[#edf2f4]">
       <img className="h-96 rounded-lg w-full" src={product.img} alt="" />
@@ -73,7 +78,10 @@ const ProductCard = ({ product }) => {
             >
               book now
             </label>
-            <button className="btn btn-sm block w-28 uppercase font-semibold py-1 px-2 bg-[#ef233c] text-white">
+            <button
+              onClick={reportProduct}
+              className="btn btn-sm block w-28 uppercase font-semibold py-1 px-2 bg-[#ef233c] text-white"
+            >
               report
             </button>
           </div>

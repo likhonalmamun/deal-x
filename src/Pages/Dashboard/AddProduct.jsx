@@ -44,7 +44,6 @@ const AddProduct = () => {
         };
         addProductToDb(newProduct, setLoading);
         setLoading(false);
-        console.log(newProduct);
       })
       .catch((er) => {
         setLoading(false);
