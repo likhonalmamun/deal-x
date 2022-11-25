@@ -5,6 +5,7 @@ import CategoryProducts from "../Pages/CategoryProducts/CategoryProducts";
 import AddProduct from "../Pages/Dashboard/AddProduct";
 import AllSellers from "../Pages/Dashboard/AllSellers";
 import MyProducts from "../Pages/Dashboard/MyProducts";
+import ErrorPage from "../Pages/ErrorPage";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
@@ -14,7 +15,7 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
-    errorElement: <div>error</div>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         index: true,
@@ -26,9 +27,13 @@ export const router = createBrowserRouter([
       },
       {
         path: "/category/:id",
+        element: (
+          <PrivateRoute>
+            <CategoryProducts></CategoryProducts>
+          </PrivateRoute>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:5000/category/${params.id}`),
-        element: <CategoryProducts></CategoryProducts>,
       },
       {
         path: "/sign-up",
@@ -39,7 +44,7 @@ export const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <DashboardLayout></DashboardLayout>,
-    errorElement: <div>error</div>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/dashboard/add-product",

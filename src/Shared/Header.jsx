@@ -7,7 +7,7 @@ import { AuthContext } from "../Contexts/AuthProvider";
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
-  console.log(user);
+  // console.log(user);
   return (
     <div className="h-20 px-7 flex justify-between items-center bg-[#2b2d42]">
       <div className="px-5 flex uppercase gap-2 items-center text-white py-2 rounded-xl w-20 text-xl font-bold">
@@ -26,7 +26,7 @@ const Header = () => {
             />
             <button
               onClick={() => logOut()}
-              className="px-3 duration-300 hover:bg-[#edf2f4] hover:text-[#d90429] py-2 rounded-xl bg-[#ef233c] text-lg font-semibold"
+              className="px-5 uppercase  duration-300 text-white hover:bg-[#edf2f4] hover:text-[#d90429] py-2 rounded-sm bg-[#ef233c] text-base font-bold"
             >
               Logout
             </button>
@@ -35,13 +35,13 @@ const Header = () => {
           <div className="text-[#edf2f4]">
             <Link
               to="/login"
-              className="px-3 duration-300 hover:bg-[#edf2f4] hover:text-[#d90429] py-2 rounded-xl bg-[#ef233c] text-lg font-semibold"
+              className="px-5 uppercase  duration-300 hover:bg-[#edf2f4] hover:text-[#d90429] py-2 rounded-sm bg-[#ef233c] text-base font-bold"
             >
               Login
             </Link>
             <Link
               to="/sign-up"
-              className="px-3 mx-2 bg-[#edf2f4] py-2 duration-300 hover:text-[#edf2f4] text-[#d90429] rounded-xl hover:bg-[#ef233c] text-lg font-semibold"
+              className="px-5 uppercase  mx-2 bg-[#edf2f4] py-2 duration-300 hover:text-[#edf2f4] text-[#d90429] rounded-sm hover:bg-[#ef233c] text-base font-bold"
             >
               Sign Up
             </Link>
@@ -50,7 +50,7 @@ const Header = () => {
         <div className="inline relative max-w-56 text-right">
           <Menu as="div" className=" text-left">
             <div className="flex justify-end">
-              <Menu.Button className="px-3 mx-2 bg-[#edf2f4] py-1 duration-300 hover:text-[#edf2f4] text-[#d90429] rounded-xl hover:bg-[#ef233c] text-lg font-semibold">
+              <Menu.Button className="px-5 uppercase  mx-2 h-[37px] bg-[#edf2f4] py-2 duration-300 hover:text-[#edf2f4] text-[#d90429] rounded-sm hover:bg-[#ef233c] text-base font-bold">
                 Go to
               </Menu.Button>
             </div>

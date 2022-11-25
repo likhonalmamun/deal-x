@@ -67,12 +67,12 @@ const SignUp = () => {
         toast.success("user created successfully");
         const newUser = {
           name: result.user.displayName,
-          role: role,
+          role: 'Buyer',
           email: result.user.email,
           image: result.user.photoURL,
           verified: false,
         };
-        console.log(newUser);
+        // console.log(newUser);
         saveUserAndGetToken(newUser);
         navigate(from);
       })
