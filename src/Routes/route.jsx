@@ -3,9 +3,12 @@ import DashboardLayout from "../layout/DashboardLayout";
 import Main from "../layout/Main";
 import CategoryProducts from "../Pages/CategoryProducts/CategoryProducts";
 import AddProduct from "../Pages/Dashboard/AddProduct";
+import AllBuyers from "../Pages/Dashboard/AllBuyers";
 import AllSellers from "../Pages/Dashboard/AllSellers";
 import MyOrders from "../Pages/Dashboard/MyOrders";
 import MyProducts from "../Pages/Dashboard/MyProducts";
+import ReportedProducts from "../Pages/Dashboard/ReportedProducts";
+import Welcome from "../Pages/Dashboard/Welcome";
 import ErrorPage from "../Pages/ErrorPage";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
@@ -53,6 +56,10 @@ export const router = createBrowserRouter([
     errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
+        index: true,
+        element: <Welcome></Welcome>,
+      },
+      {
         path: "/dashboard/add-product",
         element: <AddProduct></AddProduct>,
       },
@@ -65,12 +72,20 @@ export const router = createBrowserRouter([
         element: <AllSellers></AllSellers>,
       },
       {
+        path: "/dashboard/all-buyers",
+        element: <AllBuyers></AllBuyers>,
+      },
+      {
         path: "/dashboard/my-orders",
         element: <MyOrders></MyOrders>,
       },
       {
         path: "/dashboard/payment",
         element: <Payment></Payment>,
+      },
+      {
+        path: "/dashboard/reported-products",
+        element: <ReportedProducts></ReportedProducts>,
       },
     ],
   },

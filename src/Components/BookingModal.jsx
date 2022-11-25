@@ -43,7 +43,11 @@ const BookingModal = ({ product, setOpen }) => {
   };
   return (
     <>
-      <input type="checkbox" id="booking-modal" className="modal-toggle" />
+      <input
+        type="checkbox"
+        id={`booking-modal-${product._id}`}
+        className="modal-toggle"
+      />
       <div className="modal">
         <form
           onSubmit={bookProduct}
@@ -51,7 +55,7 @@ const BookingModal = ({ product, setOpen }) => {
           action=""
         >
           <label
-            htmlFor="booking-modal"
+            htmlFor={`booking-modal-${product._id}`}
             className="btn btn-sm btn-circle absolute right-2 top-2"
           >
             ✕

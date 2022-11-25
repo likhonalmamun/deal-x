@@ -53,7 +53,10 @@ const SignUp = () => {
               })
               .catch((er) => toast.error(er.message));
           })
-          .catch((er) => toast.error(er.message));
+          .catch((er) => {
+            setLoading(false);
+            toast.error(er.message);
+          });
       })
       .catch((er) => {
         toast.error("Failed to upload image !");
@@ -67,7 +70,7 @@ const SignUp = () => {
         toast.success("user created successfully");
         const newUser = {
           name: result.user.displayName,
-          role: 'Buyer',
+          role: "Buyer",
           email: result.user.email,
           image: result.user.photoURL,
           verified: false,

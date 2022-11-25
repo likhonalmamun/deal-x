@@ -10,6 +10,7 @@ const MyOrders = () => {
       .then((res) => res.json())
       .then((data) => setOrders(data));
   }, [user]);
+  console.log(orders);
   return (
     <div className="m-10 p-10 bg-[#edf2f4] ">
       <h1 className="text-3xl font-bold text-[#ef233c]">

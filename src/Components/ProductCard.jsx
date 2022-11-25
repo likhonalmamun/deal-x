@@ -1,10 +1,10 @@
-import userEvent from "@testing-library/user-event";
 import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../Contexts/AuthProvider";
 import BookingModal from "./BookingModal";
-
+import { MdOutlineReportProblem } from "react-icons/md";
+import { IoIosCheckmarkCircle } from "react-icons/io";
 const ProductCard = ({ product }) => {
   const { user } = useContext(AuthContext);
   const [seller, setSeller] = useState(null);
@@ -57,7 +57,11 @@ const ProductCard = ({ product }) => {
             <div className="p-2">
               <h1 className="font-bold text-[#ef233c]">
                 {seller?.name}{" "}
-                {seller?.verified && <span className="text-blue-600">TIK</span>}
+                {seller?.verified && (
+                  <span className="text-blue-600 text-xl ml-1">
+                    <IoIosCheckmarkCircle className="inline"></IoIosCheckmarkCircle>
+                  </span>
+                )}
               </h1>
               <h1 className="text-[#8d99ae] font-semibold">{product.time}</h1>
             </div>
@@ -65,7 +69,7 @@ const ProductCard = ({ product }) => {
           <div>
             {user ? (
               <label
-                htmlFor="booking-modal"
+                htmlFor={`booking-modal-${product._id}`}
                 className="btn btn-sm  w-28 mb-2 uppercase font-semibold py-1 px-2 bg-black text-white"
               >
                 book now
@@ -80,9 +84,10 @@ const ProductCard = ({ product }) => {
             )}
             <button
               onClick={reportProduct}
-              className="btn btn-sm block w-28 uppercase font-semibold py-1 px-2 bg-[#ef233c] text-white"
+              className="btn flex items-center gap-1 btn-sm  w-28 uppercase font-semibold py-1 px-2 bg-[#ef233c] text-white"
             >
-              report
+              <span>report</span>{" "}
+              <MdOutlineReportProblem className="text-base font-bold" />
             </button>
           </div>
         </div>

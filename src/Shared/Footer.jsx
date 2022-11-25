@@ -1,27 +1,34 @@
 import React from "react";
-
+import {
+  FaFacebook,
+  FaTwitter,
+  FaGoogle,
+  FaInstagram,
+  FaLinkedin,
+  FaGithub,
+} from "react-icons/fa";
 const Footer = () => {
   return (
-    <footer className="text-center mt-10 bg-[#edf2f4] text-white">
-      <div className="container pt-9">
+    <footer className="text-center mt-20 bg-[#edf2f4] text-white">
+      <div className="container text-2xl pt-9">
         <div className="flex justify-center mb-9">
-          <a href="#!" className="mr-9 text-gray-800">
-            facebook
+          <a href="#!" className="mr-9  text-gray-800">
+            <FaFacebook></FaFacebook>
           </a>
           <a href="#!" className="mr-9 text-gray-800">
-            twitter
+            <FaTwitter></FaTwitter>
           </a>
           <a href="#!" className="mr-9 text-gray-800">
-            google
+            <FaGoogle></FaGoogle>
           </a>
           <a href="#!" className="mr-9 text-gray-800">
-            insta
+            <FaInstagram></FaInstagram>
           </a>
           <a href="#!" className="mr-9 text-gray-800">
-            linked in
+            <FaLinkedin></FaLinkedin>
           </a>
           <a href="#!" className="text-gray-800">
-            github
+            <FaGithub></FaGithub>
           </a>
         </div>
       </div>

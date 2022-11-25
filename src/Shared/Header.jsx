@@ -4,7 +4,7 @@ import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import logo from "../images/swap.JPG";
 import { AuthContext } from "../Contexts/AuthProvider";
-
+import { FaBars, FaSignOutAlt } from "react-icons/fa";
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
   // console.log(user);
@@ -26,22 +26,22 @@ const Header = () => {
             />
             <button
               onClick={() => logOut()}
-              className="px-5 uppercase  duration-300 text-white hover:bg-[#edf2f4] hover:text-[#d90429] py-2 rounded-sm bg-[#ef233c] text-base font-bold"
+              className="px-3 uppercase flex items-center gap-1 duration-300 text-white hover:bg-[#edf2f4] hover:text-[#d90429] py-2 rounded-sm bg-[#ef233c] text-base font-semibold"
             >
-              Logout
+              <span>Logout</span> <FaSignOutAlt className="inline"></FaSignOutAlt>
             </button>
           </>
         ) : (
           <div className="text-[#edf2f4]">
             <Link
               to="/login"
-              className="px-5 uppercase  duration-300 hover:bg-[#edf2f4] hover:text-[#d90429] py-2 rounded-sm bg-[#ef233c] text-base font-bold"
+              className="px-3 uppercase  duration-300 hover:bg-[#edf2f4] hover:text-[#d90429] py-2 rounded-sm bg-[#ef233c] text-base font-semibold"
             >
               Login
             </Link>
             <Link
               to="/sign-up"
-              className="px-5 uppercase  mx-2 bg-[#edf2f4] py-2 duration-300 hover:text-[#edf2f4] text-[#d90429] rounded-sm hover:bg-[#ef233c] text-base font-bold"
+              className="px-3 uppercase  mx-2 bg-[#edf2f4] py-2 duration-300 hover:text-[#edf2f4] text-[#d90429] rounded-sm hover:bg-[#ef233c] text-base font-semibold"
             >
               Sign Up
             </Link>
@@ -50,8 +50,8 @@ const Header = () => {
         <div className="inline relative max-w-56 text-right">
           <Menu as="div" className=" text-left">
             <div className="flex justify-end">
-              <Menu.Button className="px-5 uppercase  mx-2 h-[37px] bg-[#edf2f4] py-2 duration-300 hover:text-[#edf2f4] text-[#d90429] rounded-sm hover:bg-[#ef233c] text-base font-bold">
-                Go to
+              <Menu.Button className="px-3 uppercase  mx-2 h-[37px] bg-[#edf2f4] py-0 duration-300 hover:text-[#edf2f4] text-[#d90429] rounded-sm hover:bg-[#ef233c] text-xl ">
+                <FaBars></FaBars>
               </Menu.Button>
             </div>
             <Transition

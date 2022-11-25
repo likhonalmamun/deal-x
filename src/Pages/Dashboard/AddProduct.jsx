@@ -3,10 +3,12 @@ import { format } from "date-fns";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../Contexts/AuthProvider";
 import { addProductToDb } from "../../Api/addProduct";
+import { useNavigate } from "react-router-dom";
 const AddProduct = () => {
   const { user } = useContext(AuthContext);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   useEffect(() => {
     fetch("http://localhost:5000/categories")
       .then((res) => res.json())
@@ -44,6 +46,7 @@ const AddProduct = () => {
         };
         addProductToDb(newProduct, setLoading);
         setLoading(false);
+        navigate("/dashboard/my-products");
       })
       .catch((er) => {
         setLoading(false);

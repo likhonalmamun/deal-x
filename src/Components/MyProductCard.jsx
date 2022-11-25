@@ -12,6 +12,15 @@ const MyProductCard = ({ product }) => {
       .then((data) => toast.success(data.success))
       .catch((er) => toast.error(er.message));
   };
+  const deleteProduct = (id) => {
+    fetch(`http://localhost:5000/products/${id}`, {
+      method: "DELETE",
+      headers: { "content-type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((data) => toast.success(data.success))
+      .catch((er) => toast.error(er.message));
+  };
   return (
     <div className="p-3 rounded-lg border-2 border-[#2b2d42] bg-[#edf2f4]">
       <img className="h-52 rounded-lg w-full" src={product.img} alt="" />
@@ -30,7 +39,12 @@ const MyProductCard = ({ product }) => {
         </div>
 
         <div className="mt-1 flex justify-between gap-2">
-          <button className="btn btn-sm flex-1 mb-2 uppercase font-semibold py-1 px-2 bg-[#ef233c] text-white">
+          <button
+            onClick={() => {
+              deleteProduct(product._id);
+            }}
+            className="btn btn-sm flex-1 mb-2 uppercase font-semibold py-1 px-2 bg-[#ef233c] text-white"
+          >
             Delete
           </button>
           {product.status !== "sold" && product.advertised !== true && (
