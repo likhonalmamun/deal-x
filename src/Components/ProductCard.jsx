@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { AuthContext } from "../Contexts/AuthProvider";
+import BookingModal from "./BookingModal";
 
 const ProductCard = ({ product }) => {
   const { logOut, user } = useContext(AuthContext);
   const [seller, setSeller] = useState(null);
-
+  const [open, setOpen] = useState(true);
   useEffect(() => {
     fetch(
       `http://localhost:5000/users/${product.sellerEmail}?payload=${user.email}`,
@@ -66,15 +67,21 @@ const ProductCard = ({ product }) => {
             </div>
           </div>
           <div>
-            <button className="btn btn-sm block w-28 mb-2 uppercase font-semibold py-1 px-2 bg-black text-white">
-              book now{" "}
-            </button>
+            <label
+              htmlFor="booking-modal"
+              className="btn btn-sm  w-28 mb-2 uppercase font-semibold py-1 px-2 bg-black text-white"
+            >
+              book now
+            </label>
             <button className="btn btn-sm block w-28 uppercase font-semibold py-1 px-2 bg-[#ef233c] text-white">
               report
             </button>
           </div>
         </div>
       </div>
+      {open && (
+        <BookingModal setOpen={setOpen} product={product}></BookingModal>
+      )}
     </div>
   );
 };
