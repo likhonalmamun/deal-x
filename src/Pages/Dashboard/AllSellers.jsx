@@ -13,8 +13,16 @@ const AllSellers = () => {
       .then((data) => toast.success(data.success))
       .catch((er) => toast.error(er.message));
   };
-  const deleteSeller = (seller) => {
-    console.log("deleting seller", seller.name);
+  const deleteSeller = (email) => {
+    fetch(`http://localhost:5000/deleteSeller/${email}`, {
+      method: "DELETE",
+      headers: { "content-type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        toast.success(data.success);
+      })
+      .catch((er) => toast.error(er.message));
   };
   return (
     <div className="m-10 p-10 bg-[#edf2f4] ">
@@ -38,7 +46,7 @@ const AllSellers = () => {
             </div>
             <div>
               <button
-                onClick={() => deleteSeller(seller)}
+                onClick={() => deleteSeller(seller.email)}
                 className="btn bg-red-500 border-0 mx-2 btn-sm"
               >
                 Delete

@@ -17,6 +17,7 @@ const BookingModal = ({ product, setOpen }) => {
       price: product.resellPrice,
       buyer: user?.displayName,
       buyerEmail: user?.email,
+      sellerEmail: product.sellerEmail,
       phone: e.target.phone.value,
       location: e.target.location.value,
     };
