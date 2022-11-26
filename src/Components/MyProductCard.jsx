@@ -1,19 +1,32 @@
-import React from "react";
+import React, { useContext } from "react";
 import toast from "react-hot-toast";
+import { AuthContext } from "../Contexts/AuthProvider";
 
 const MyProductCard = ({ product }) => {
-  //   console.log(product);
+  const { user, logOut } = useContext(AuthContext);
   const advertise = () => {
     if (product.status === "sold") {
       return toast.error("This product is not available!");
     }
-    fetch(`http://localhost:5000/ad/${product._id}`, { method: "PATCH" })
+    fetch(`https://assignment-12-server-black.vercel.app/ad/${product._id}?email=${user?.email}`, {
+      method: "PATCH",
+      headers: {
+        authorization: `bearer ${localStorage.getItem("DealX-token")}`,
+      },
+    })
       .then((res) => res.json())
-      .then((data) => toast.success(data.success))
+      .then((data) => {
+        if (data.message) {
+          toast.error(data.message);
+          logOut();
+        } else {
+          toast.success(data.success);
+        }
+      })
       .catch((er) => toast.error(er.message));
   };
   const deleteProduct = (id) => {
-    fetch(`http://localhost:5000/products/${id}`, {
+    fetch(`https://assignment-12-server-black.vercel.app/products/${id}`, {
       method: "DELETE",
       headers: { "content-type": "application/json" },
     })

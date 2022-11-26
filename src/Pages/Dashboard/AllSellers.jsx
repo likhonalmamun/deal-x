@@ -1,23 +1,46 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { AuthContext } from "../../Contexts/AuthProvider";
 const AllSellers = () => {
-  const [allSellers, setAllSelers] = useState([]);
+  const [allSellers, setAllSellers] = useState([]);
+  const { user, logOut } = useContext(AuthContext);
   useEffect(() => {
-    fetch(`http://localhost:5000/users?role=Seller`)
+    fetch(
+      `https://assignment-12-server-black.vercel.app/role/${"Seller"}?email=${
+        user?.email
+      }`,
+      {
+        headers: {
+          authorization: `bearer ${localStorage.getItem("DealX-token")}`,
+        },
+      }
+    )
       .then((res) => res.json())
-      .then((data) => setAllSelers(data));
-  }, []);
+      .then((data) => {
+        if (data.message) {
+          toast.error(data.message);
+          logOut();
+        } else {
+          setAllSellers(data);
+        }
+      });
+  }, [user]);
   const verifySeller = (id) => {
-    fetch(`http://localhost:5000/verifySeller/${id}`, { method: "PATCH" })
+    fetch(`https://assignment-12-server-black.vercel.app/verifySeller/${id}`, {
+      method: "PATCH",
+    })
       .then((res) => res.json())
       .then((data) => toast.success(data.success))
       .catch((er) => toast.error(er.message));
   };
   const deleteSeller = (email) => {
-    fetch(`http://localhost:5000/deleteSeller/${email}`, {
-      method: "DELETE",
-      headers: { "content-type": "application/json" },
-    })
+    fetch(
+      `https://assignment-12-server-black.vercel.app/deleteSeller/${email}`,
+      {
+        method: "DELETE",
+        headers: { "content-type": "application/json" },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         toast.success(data.success);
@@ -26,7 +49,9 @@ const AllSellers = () => {
   };
   return (
     <div className="m-10 p-10 bg-[#edf2f4] ">
-      <h1 className="text-3xl font-bold text-[#ef233c]">{allSellers.length> 0? "All Sellers" : "No seller to show"}</h1>
+      <h1 className="text-3xl font-bold text-[#ef233c]">
+        {allSellers.length > 0 ? "All Sellers" : "No seller to show"}
+      </h1>
       <div className="mt-10 ">
         {allSellers.map((seller) => (
           <div

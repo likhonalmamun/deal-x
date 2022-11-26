@@ -22,7 +22,7 @@ const BookingModal = ({ product, setOpen }) => {
       location: e.target.location.value,
     };
 
-    fetch("http://localhost:5000/bookings", {
+    fetch("https://assignment-12-server-black.vercel.app/bookings", {
       method: "POST",
       headers: {
         "content-type": "application/json",

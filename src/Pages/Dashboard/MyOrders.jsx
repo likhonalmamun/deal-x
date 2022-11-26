@@ -1,14 +1,29 @@
 import React, { useContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import MyOrderCard from "../../Components/MyOrderCard";
 import { AuthContext } from "../../Contexts/AuthProvider";
 
 const MyOrders = () => {
   const [orders, setOrders] = useState([]);
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
   useEffect(() => {
-    fetch(`http://localhost:5000/myOrders?email=${user?.email}`)
+    fetch(
+      `https://assignment-12-server-black.vercel.app/myOrders?email=${user?.email}`,
+      {
+        headers: {
+          authorization: `bearer ${localStorage.getItem("DealX-token")}`,
+        },
+      }
+    )
       .then((res) => res.json())
-      .then((data) => setOrders(data));
+      .then((data) => {
+        if (data.message) {
+          toast.error(data.message);
+          logOut();
+        } else {
+          setOrders(data);
+        }
+      });
   }, [user]);
   return (
     <div className="m-10 p-10 bg-[#edf2f4] ">

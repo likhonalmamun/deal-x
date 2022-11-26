@@ -1,5 +1,5 @@
 export const saveUserAndGetToken = (newUser) => {
-  fetch(`http://localhost:5000/users/${newUser.email}`, {
+  fetch(`https://assignment-12-server-black.vercel.app/users/${newUser.email}`, {
     method: "POST",
     headers: {
       "content-type": "application/json",

@@ -1,20 +1,40 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { AuthContext } from "../../Contexts/AuthProvider";
 
 const AllBuyers = () => {
   const [allBuyers, setAllBuyers] = useState([]);
+  const { user, logOut } = useContext(AuthContext);
   useEffect(() => {
-    fetch(`http://localhost:5000/users?role=Buyer`)
+    fetch(
+      `https://assignment-12-server-black.vercel.app/role/${"Buyer"}?email=${
+        user?.email
+      }`,
+      {
+        headers: {
+          authorization: `bearer ${localStorage.getItem("DealX-token")}`,
+        },
+      }
+    )
       .then((res) => res.json())
-      .then((data) => setAllBuyers(data));
-  }, []);
+      .then((data) => {
+        if (data.message) {
+          toast.error(data.message);
+          logOut();
+        } else {
+          setAllBuyers(data);
+        }
+      });
+  }, [user]);
   const deleteBuyer = (email) => {
-    fetch(`http://localhost:5000/users/${email}`, {
+    fetch(`https://assignment-12-server-black.vercel.app/users/${email}`, {
       method: "DELETE",
       headers: { "content-type": "application/json" },
     })
       .then((res) => res.json())
-      .then((data) => toast.success(data.success))
+      .then((data) => {
+        toast.success(data.success);
+      })
       .catch((er) => toast.error(er.message));
   };
   return (

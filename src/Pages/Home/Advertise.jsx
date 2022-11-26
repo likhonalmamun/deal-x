@@ -5,7 +5,7 @@ import ProductCard from "../../Components/ProductCard";
 const Advertise = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:5000/ad`)
+    fetch(`https://assignment-12-server-black.vercel.app/ad`)
       .then((res) => res.json())
       .then((data) => setProducts(data))
       .catch((er) => toast.error(er.message));

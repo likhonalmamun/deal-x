@@ -10,7 +10,7 @@ const AddProduct = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
-    fetch("http://localhost:5000/categories")
+    fetch("https://assignment-12-server-black.vercel.app/categories")
       .then((res) => res.json())
       .then((data) => setCategories(data));
   }, []);

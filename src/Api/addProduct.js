@@ -1,7 +1,7 @@
 import toast from "react-hot-toast";
 
 export const addProductToDb = (newProduct, setLoading) => {
-  fetch(`http://localhost:5000/products`, {
+  fetch(`https://assignment-12-server-black.vercel.app/products`, {
     method: "POST",
     headers: {
       "content-type": "application/json",

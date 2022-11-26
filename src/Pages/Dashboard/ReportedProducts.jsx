@@ -4,12 +4,12 @@ import toast from "react-hot-toast";
 const ReportedProducts = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:5000/reported`)
+    fetch(`https://assignment-12-server-black.vercel.app/reported`)
       .then((res) => res.json())
       .then((data) => setProducts(data));
   }, []);
   const deleteProduct = (id) => {
-    fetch(`http://localhost:5000/products/${id}`, {
+    fetch(`https://assignment-12-server-black.vercel.app/products/${id}`, {
       method: "DELETE",
       headers: { "content-type": "application/json" },
     })
@@ -19,7 +19,11 @@ const ReportedProducts = () => {
   };
   return (
     <div className="m-10 p-10 bg-[#edf2f4] ">
-      <h1 className="text-3xl font-bold text-[#ef233c]">{products.length>0 ? "Reported Products" : "No reported product available!"}</h1>
+      <h1 className="text-3xl font-bold text-[#ef233c]">
+        {products.length > 0
+          ? "Reported Products"
+          : "No reported product available!"}
+      </h1>
       <div className="mt-10 ">
         {products.map((product) => (
           <div

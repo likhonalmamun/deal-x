@@ -11,7 +11,9 @@ const ProductCard = ({ product }) => {
   const [open, setOpen] = useState(true);
   const [role, setRole] = useState("");
   useEffect(() => {
-    fetch(`http://localhost:5000/users/${product.sellerEmail}`)
+    fetch(
+      `https://assignment-12-server-black.vercel.app/users/${product.sellerEmail}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setSeller(data);
@@ -20,7 +22,9 @@ const ProductCard = ({ product }) => {
   }, [product]);
   useEffect(() => {
     if (user) {
-      fetch(`http://localhost:5000/users/${user?.email}`)
+      fetch(
+        `https://assignment-12-server-black.vercel.app/users/${user?.email}`
+      )
         .then((res) => res.json())
         .then((data) => {
           setRole(data.role);
@@ -29,7 +33,10 @@ const ProductCard = ({ product }) => {
     }
   }, [user]);
   const reportProduct = () => {
-    fetch(`http://localhost:5000/products/${product._id}`, { method: "PATCH" })
+    fetch(
+      `https://assignment-12-server-black.vercel.app/products/${product._id}`,
+      { method: "PATCH" }
+    )
       .then((res) => res.json())
       .then((data) => toast.success(data.success))
       .catch((er) => toast.error(er.message));
