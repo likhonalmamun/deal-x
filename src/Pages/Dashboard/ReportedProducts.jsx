@@ -19,7 +19,7 @@ const ReportedProducts = () => {
   };
   return (
     <div className="m-10 p-10 bg-[#edf2f4] ">
-      <h1 className="text-3xl font-bold text-[#ef233c]">Reported Products</h1>
+      <h1 className="text-3xl font-bold text-[#ef233c]">{products.length>0 ? "Reported Products" : "No reported product available!"}</h1>
       <div className="mt-10 ">
         {products.map((product) => (
           <div

@@ -28,7 +28,8 @@ const Header = () => {
               onClick={() => logOut()}
               className="px-3 uppercase flex items-center gap-1 duration-300 text-white hover:bg-[#edf2f4] hover:text-[#d90429] py-2 rounded-sm bg-[#ef233c] text-base font-semibold"
             >
-              <span>Logout</span> <FaSignOutAlt className="inline"></FaSignOutAlt>
+              <span>Logout</span>{" "}
+              <FaSignOutAlt className="inline"></FaSignOutAlt>
             </button>
           </>
         ) : (
@@ -79,17 +80,33 @@ const Header = () => {
                       </Link>
                     )}
                   </Menu.Item>
+                  {user && (
+                    <Menu.Item>
+                      {({ active }) => (
+                        <Link
+                          to="/dashboard"
+                          className={`${
+                            active
+                              ? "bg-[#ef233c] text-[#edf2f4]"
+                              : "text-[#d90429]"
+                          } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                        >
+                          Dashboard
+                        </Link>
+                      )}
+                    </Menu.Item>
+                  )}
                   <Menu.Item>
                     {({ active }) => (
                       <Link
-                        to="/dashboard"
+                        to="/blogs"
                         className={`${
                           active
                             ? "bg-[#ef233c] text-[#edf2f4]"
                             : "text-[#d90429]"
                         } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                       >
-                        Dashboard
+                        Blogs
                       </Link>
                     )}
                   </Menu.Item>

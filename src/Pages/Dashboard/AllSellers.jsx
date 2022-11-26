@@ -26,7 +26,7 @@ const AllSellers = () => {
   };
   return (
     <div className="m-10 p-10 bg-[#edf2f4] ">
-      <h1 className="text-3xl font-bold text-[#ef233c]">All Sellers</h1>
+      <h1 className="text-3xl font-bold text-[#ef233c]">{allSellers.length> 0? "All Sellers" : "No seller to show"}</h1>
       <div className="mt-10 ">
         {allSellers.map((seller) => (
           <div

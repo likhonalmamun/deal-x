@@ -19,7 +19,9 @@ const AllBuyers = () => {
   };
   return (
     <div className="m-10 p-10 bg-[#edf2f4] ">
-      <h1 className="text-3xl font-bold text-[#ef233c]">All Buyers</h1>
+      <h1 className="text-3xl font-bold text-[#ef233c]">
+        {allBuyers.length > 0 ? "All Buyers" : "No Buyer to Show !"}
+      </h1>
       <div className="mt-10 ">
         {allBuyers.map((buyer) => (
           <div

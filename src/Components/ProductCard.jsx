@@ -9,6 +9,7 @@ const ProductCard = ({ product }) => {
   const { user } = useContext(AuthContext);
   const [seller, setSeller] = useState(null);
   const [open, setOpen] = useState(true);
+  const [role, setRole] = useState("");
   useEffect(() => {
     fetch(`http://localhost:5000/users/${product.sellerEmail}`)
       .then((res) => res.json())
@@ -17,6 +18,16 @@ const ProductCard = ({ product }) => {
       })
       .catch((er) => toast.error(er.message));
   }, [product]);
+  useEffect(() => {
+    if (user) {
+      fetch(`http://localhost:5000/users/${user?.email}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setRole(data.role);
+        })
+        .catch((er) => toast.error(er.message));
+    }
+  }, [user]);
   const reportProduct = () => {
     fetch(`http://localhost:5000/products/${product._id}`, { method: "PATCH" })
       .then((res) => res.json())
@@ -70,7 +81,11 @@ const ProductCard = ({ product }) => {
             {user ? (
               <label
                 htmlFor={`booking-modal-${product._id}`}
-                className="btn btn-sm  w-28 mb-2 uppercase font-semibold py-1 px-2 bg-black text-white"
+                className={
+                  role === "Buyer"
+                    ? "btn btn-sm  w-28 mb-2 uppercase font-semibold py-1 px-2 bg-black text-white"
+                    : "hidden"
+                }
               >
                 book now
               </label>
