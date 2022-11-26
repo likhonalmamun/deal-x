@@ -107,12 +107,14 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/payment",
+        path: "/dashboard/payment/:productId",
         element: (
           <BuyerRoute>
             <Payment></Payment>
           </BuyerRoute>
         ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/products/${params.productId}`),
       },
       {
         path: "/dashboard/reported-products",
