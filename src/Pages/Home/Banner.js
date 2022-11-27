@@ -16,7 +16,8 @@ const Banner = () => {
           <br /> Deal<span className="text-[#ef233c]">X</span> .
         </h1>
         <h1 className="text-2xl mt-5">
-          Find your product or customer <br /> Deal
+          Find your product or customer on
+          <br /> Deal
           <span className="text-[#ef233c]">X</span> .
         </h1>
       </div>

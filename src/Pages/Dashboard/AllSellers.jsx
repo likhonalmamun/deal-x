@@ -1,36 +1,44 @@
+import { useQuery } from "@tanstack/react-query";
 import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../Contexts/AuthProvider";
 const AllSellers = () => {
-  const [allSellers, setAllSellers] = useState([]);
   const { user, logOut } = useContext(AuthContext);
-  useEffect(() => {
-    fetch(
-      `https://assignment-12-server-black.vercel.app/role/${"Seller"}?email=${
-        user?.email
-      }`,
-      {
-        headers: {
-          authorization: `bearer ${localStorage.getItem("DealX-token")}`,
-        },
-      }
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.message) {
-          toast.error(data.message);
-          logOut();
-        } else {
-          setAllSellers(data);
+  const {
+    data: allSellers = [],
+    refetch,
+    isLoading,
+  } = useQuery({
+    queryKey: ["allSellers", user],
+    queryFn: async () => {
+      const res = await fetch(
+        `https://assignment-12-server-black.vercel.app/role/${"Seller"}?email=${
+          user?.email
+        }`,
+        {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("DealX-token")}`,
+          },
         }
-      });
-  }, [user]);
+      );
+      const data = await res.json();
+      if (data.message) {
+        logOut();
+        toast.error(data.message);
+      } else {
+        return data;
+      }
+    },
+  });
   const verifySeller = (id) => {
     fetch(`https://assignment-12-server-black.vercel.app/verifySeller/${id}`, {
       method: "PATCH",
     })
       .then((res) => res.json())
-      .then((data) => toast.success(data.success))
+      .then((data) => {
+        refetch();
+        toast.success(data.success);
+      })
       .catch((er) => toast.error(er.message));
   };
   const deleteSeller = (email) => {
@@ -43,15 +51,20 @@ const AllSellers = () => {
     )
       .then((res) => res.json())
       .then((data) => {
+        refetch();
         toast.success(data.success);
       })
       .catch((er) => toast.error(er.message));
   };
   return (
     <div className="m-10 p-10 bg-[#edf2f4] ">
-      <h1 className="text-3xl font-bold text-[#ef233c]">
-        {allSellers.length > 0 ? "All Sellers" : "No seller to show"}
-      </h1>
+      {isLoading ? (
+        <h1 className="text-3xl font-bold text-[#ef233c]">Loading...</h1>
+      ) : (
+        <h1 className="text-3xl font-bold text-[#ef233c]">
+          {allSellers.length > 0 ? "All Sellers" : "No seller to show"}
+        </h1>
+      )}
       <div className="mt-10 ">
         {allSellers.map((seller) => (
           <div
@@ -77,6 +90,7 @@ const AllSellers = () => {
                 Delete
               </button>
               <button
+                disabled={seller.verified ? true : false}
                 onClick={() => verifySeller(seller._id)}
                 className="btn bg-blue-600 border-0 btn-sm"
               >

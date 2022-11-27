@@ -4,15 +4,21 @@ import toast from "react-hot-toast";
 import { AuthContext } from "../../Contexts/AuthProvider";
 import { addProductToDb } from "../../Api/addProduct";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 const AddProduct = () => {
   const { user } = useContext(AuthContext);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
-    fetch("https://assignment-12-server-black.vercel.app/categories")
-      .then((res) => res.json())
-      .then((data) => setCategories(data));
+    axios
+      .get("https://assignment-12-server-black.vercel.app/categories")
+      .then((response) => {
+        setCategories(response.data);
+      })
+      .catch((er) => {
+        toast.error(er.message);
+      });
   }, []);
   const addProduct = (e) => {
     e.preventDefault();
@@ -38,13 +44,12 @@ const AddProduct = () => {
           phone: e.target.phone.value,
           status: "available",
           reported: false,
-          paid: false,
           advertized: false,
           img: imgData.data.display_url,
           time: format(new Date(), "Pp"),
           sellerEmail: user.email,
         };
-        addProductToDb(newProduct, setLoading);
+        addProductToDb(newProduct, setLoading, user?.email);
         setLoading(false);
         navigate("/dashboard/my-products");
       })

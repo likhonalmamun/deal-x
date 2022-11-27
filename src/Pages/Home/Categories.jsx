@@ -1,13 +1,19 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import CategoryCard from "../../Components/CategoryCard";
-
 const Categories = () => {
   const [categories, setCategories] = useState([]);
   useEffect(() => {
-    fetch("https://assignment-12-server-black.vercel.app/categories")
-      .then((res) => res.json())
-      .then((data) => setCategories(data));
+    axios
+      .get("https://assignment-12-server-black.vercel.app/categories")
+      .then((response) => {
+        setCategories(response.data);
+      })
+      .catch((er) => {
+        toast.error(er.message);
+      });
   }, []);
   return (
     <div className="mt-10 p-5">

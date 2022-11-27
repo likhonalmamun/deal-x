@@ -42,7 +42,13 @@ const ProductCard = ({ product }) => {
       .catch((er) => toast.error(er.message));
   };
   return (
-    <div className="p-3 rounded-lg border-2 border-[#2b2d42] bg-[#edf2f4]">
+    <div
+      className={
+        product.status === "sold"
+          ? "hidden"
+          : "p-3 rounded-lg border-2 border-[#2b2d42] bg-[#edf2f4]"
+      }
+    >
       <img className="h-96 rounded-lg w-full" src={product.img} alt="" />
       <div className="flex flex-col border-t-2 border-[#ef233c] mt-1 justify-between">
         <div className="p-4 min-h-[195px]">

@@ -2,18 +2,21 @@ import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { AuthContext } from "../Contexts/AuthProvider";
 
-const MyProductCard = ({ product }) => {
+const MyProductCard = ({ product, refetch }) => {
   const { user, logOut } = useContext(AuthContext);
   const advertise = () => {
     if (product.status === "sold") {
       return toast.error("This product is not available!");
     }
-    fetch(`https://assignment-12-server-black.vercel.app/ad/${product._id}?email=${user?.email}`, {
-      method: "PATCH",
-      headers: {
-        authorization: `bearer ${localStorage.getItem("DealX-token")}`,
-      },
-    })
+    fetch(
+      `https://assignment-12-server-black.vercel.app/ad/${product._id}?email=${user?.email}`,
+      {
+        method: "PATCH",
+        headers: {
+          authorization: `bearer ${localStorage.getItem("DealX-token")}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.message) {
@@ -21,6 +24,7 @@ const MyProductCard = ({ product }) => {
           logOut();
         } else {
           toast.success(data.success);
+          refetch();
         }
       })
       .catch((er) => toast.error(er.message));
@@ -31,7 +35,10 @@ const MyProductCard = ({ product }) => {
       headers: { "content-type": "application/json" },
     })
       .then((res) => res.json())
-      .then((data) => toast.success(data.success))
+      .then((data) => {
+        toast.success(data.success);
+        refetch();
+      })
       .catch((er) => toast.error(er.message));
   };
   return (

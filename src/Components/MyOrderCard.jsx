@@ -17,9 +17,10 @@ const MyOrderCard = ({ order }) => {
         <div className="mt-1">
           <Link
             to={`/dashboard/payment/${order._id}`}
+            disabled={order.paid}
             className="btn btn-sm w-full mb-2 uppercase font-semibold py-1 px-2 bg-[#ef233c] text-white"
           >
-            Pay now
+            {order.paid ? "Paid" : "Pay now"}
           </Link>
         </div>
       </div>

@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { AuthContext } from "../../Contexts/AuthProvider";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 const PaymentForm = ({ order }) => {
   const { user } = useContext(AuthContext);
   const [paymentError, setPaymentError] = useState("");
@@ -11,7 +12,7 @@ const PaymentForm = ({ order }) => {
   const [processing, setProcessing] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
-
+  const navigate = useNavigate();
   useEffect(() => {
     fetch(`http://localhost:5000/create-payment-intent?email=${user?.email}`, {
       method: "POST",
@@ -59,15 +60,8 @@ const PaymentForm = ({ order }) => {
             setPaymentError(intentError.message);
             return;
           } else {
-            await setTransactionId(paymentIntent.id);
-            const payment = {
-              transactionId: transactionId,
-              orderId: order._id,
-              productId: order.productId,
-              amount: order.price,
-              customer: order.buyerEmail,
-            };
-            console.log(payment);
+            setTransactionId(paymentIntent.id);
+
             setSuccess("Your transition is successful");
             fetch(`http://localhost:5000/payments?email=${user?.email}`, {
               method: "POST",
@@ -75,13 +69,20 @@ const PaymentForm = ({ order }) => {
                 "content-type": "application/json",
                 authorization: `bearer ${localStorage.getItem("DealX-token")}`,
               },
-              body: JSON.stringify(payment),
+              body: JSON.stringify({
+                transactionId: transactionId,
+                orderId: order._id,
+                productId: order.productId,
+                amount: order.price,
+                customer: order.buyerEmail,
+              }),
             })
               .then((res) => res.json())
               .then((data) => {
                 setSuccess("Your transition is successful");
 
                 toast.success("Payment history saved !");
+                navigate("/dashboard/my-orders");
               });
           }
         }
@@ -116,9 +117,9 @@ const PaymentForm = ({ order }) => {
         <button
           className="btn btn-sm bg-[#ef233c] w-full mt-9"
           type="submit"
-          disabled={!stripe || !clientSecret || processing}
+          disabled={!stripe || !clientSecret || processing || order.paid}
         >
-          Pay
+          {order.paid ? "Paid" : "Pay now"}
         </button>
       </form>
       <p className="text-sm font-bold text-red-500">{paymentError}</p>

@@ -1,31 +1,39 @@
+import { useQuery } from "@tanstack/react-query";
 import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../Contexts/AuthProvider";
 
 const AllBuyers = () => {
-  const [allBuyers, setAllBuyers] = useState([]);
+  // const [allBuyers, setAllBuyers] = useState([]);
   const { user, logOut } = useContext(AuthContext);
-  useEffect(() => {
-    fetch(
-      `https://assignment-12-server-black.vercel.app/role/${"Buyer"}?email=${
-        user?.email
-      }`,
-      {
-        headers: {
-          authorization: `bearer ${localStorage.getItem("DealX-token")}`,
-        },
-      }
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.message) {
-          toast.error(data.message);
-          logOut();
-        } else {
-          setAllBuyers(data);
+
+  const {
+    data: allBuyers = [],
+    refetch,
+    isLoading,
+  } = useQuery({
+    queryKey: ["allBuyers", user],
+    queryFn: async () => {
+      const res = await fetch(
+        `https://assignment-12-server-black.vercel.app/role/${"Buyer"}?email=${
+          user?.email
+        }`,
+        {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("DealX-token")}`,
+          },
         }
-      });
-  }, [user]);
+      );
+      const data = await res.json();
+      if (data.message) {
+        logOut();
+        toast.error(data.message);
+      } else {
+        return data;
+      }
+    },
+  });
+
   const deleteBuyer = (email) => {
     fetch(`https://assignment-12-server-black.vercel.app/users/${email}`, {
       method: "DELETE",
@@ -33,15 +41,20 @@ const AllBuyers = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        refetch();
         toast.success(data.success);
       })
       .catch((er) => toast.error(er.message));
   };
   return (
     <div className="m-10 p-10 bg-[#edf2f4] ">
-      <h1 className="text-3xl font-bold text-[#ef233c]">
-        {allBuyers.length > 0 ? "All Buyers" : "No Buyer to Show !"}
-      </h1>
+      {isLoading ? (
+        <h1 className="text-3xl font-bold text-[#ef233c]">Loading...</h1>
+      ) : (
+        <h1 className="text-3xl font-bold text-[#ef233c]">
+          {allBuyers.length > 0 ? "All Buyers" : "No Buyer to Show !"}
+        </h1>
+      )}
       <div className="mt-10 ">
         {allBuyers.map((buyer) => (
           <div

@@ -1,29 +1,47 @@
+import { useQuery } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 const ReportedProducts = () => {
-  const [products, setProducts] = useState([]);
-  useEffect(() => {
-    fetch(`https://assignment-12-server-black.vercel.app/reported`)
-      .then((res) => res.json())
-      .then((data) => setProducts(data));
-  }, []);
+  // const [products, setProducts] = useState([]);
+
+  const {
+    data: products = [],
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["products"],
+    queryFn: async () => {
+      const res = await fetch(
+        `https://assignment-12-server-black.vercel.app/reported`
+      );
+      const data = await res.json();
+      return data;
+    },
+  });
   const deleteProduct = (id) => {
     fetch(`https://assignment-12-server-black.vercel.app/products/${id}`, {
       method: "DELETE",
       headers: { "content-type": "application/json" },
     })
       .then((res) => res.json())
-      .then((data) => toast.success(data.success))
+      .then((data) => {
+        refetch();
+        toast.success(data.success);
+      })
       .catch((er) => toast.error(er.message));
   };
   return (
     <div className="m-10 p-10 bg-[#edf2f4] ">
-      <h1 className="text-3xl font-bold text-[#ef233c]">
-        {products.length > 0
-          ? "Reported Products"
-          : "No reported product available!"}
-      </h1>
+      {isLoading ? (
+        <h1 className="text-3xl font-bold text-[#ef233c]">Loading...</h1>
+      ) : (
+        <h1 className="text-3xl font-bold text-[#ef233c]">
+          {products.length > 0
+            ? "Reported Products"
+            : "No reported product available!"}
+        </h1>
+      )}
       <div className="mt-10 ">
         {products.map((product) => (
           <div
