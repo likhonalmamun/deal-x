@@ -13,12 +13,12 @@ const Login = () => {
   const from = location.state?.from?.pathname || "/";
   const login = (e) => {
     e.preventDefault();
+    setLoading(true);
     const email = e.target.email.value;
     const password = e.target.password.value;
 
     signInWithPass(email, password)
       .then((result) => {
-        setLoading(true);
         toast.success("Logged in successfully !");
         getToken(email);
         setLoading(false);
@@ -31,9 +31,9 @@ const Login = () => {
   };
 
   const googleSignIn = () => {
+    setLoading(true);
     googleLogin()
       .then((result) => {
-        setLoading(true);
         toast.success("Logged in successfully !");
         const newUser = {
           name: result.user.displayName,
@@ -52,8 +52,8 @@ const Login = () => {
       });
   };
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="min-h-[520px] p-5 bg-[#2b2d42] w-[430px] rounded-xl shadow-xl shadow-[#8d99ae]">
+    <div className="sm:min-h-screen mt-14 sm:mt-0 p-2 sm:p-0 flex items-center justify-center">
+      <div className="sm:min-h-[520px] pb-10 sm:pb-2 p-2 sm:p-5 bg-[#2b2d42] w-[430px] rounded-xl shadow-xl shadow-[#8d99ae]">
         <form onSubmit={login} action="">
           <h1 className="text-3xl mt-3 text-[#d90429] font-bold  text-center">
             Login
@@ -88,7 +88,18 @@ const Login = () => {
             type="submit"
             className="w-full py-2 mt-4 hover:bg-[#edf2f4] hover:text-[#d90429] duration-300 rounded-lg bg-[#ef233c] text-[#edf2f4] text-lg font-bold"
           >
-            {loading ? "Loading..." : "Login"}
+            {loading ? (
+              <div
+                className="radial-progress text-white mx-auto animate-spin"
+                style={{
+                  "--value": "80",
+                  "--size": "2rem",
+                  "--thickness": "0.3rem",
+                }}
+              ></div>
+            ) : (
+              "Login"
+            )}
           </button>
         </form>
         <h1 className="text-white text-lg text-center font-bold mt-3">OR</h1>

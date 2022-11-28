@@ -7,9 +7,16 @@ const PrivateRoute = ({ children }) => {
   const location = useLocation();
   if (loading) {
     return (
-      <h1 className="text-green-500  font-bold text-3xl text-center mt-32">
-        Loading...
-      </h1>
+      <div className="flex justify-center mt-[200px] mx-auto w-full items-center h-[200px]">
+        <div
+          className="radial-progress text-[#ef233c] mx-auto animate-spin"
+          style={{
+            "--value": "80",
+            "--size": "3rem",
+            "--thickness": "0.3rem",
+          }}
+        ></div>
+      </div>
     );
   }
   if (!user) {

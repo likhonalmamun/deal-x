@@ -14,16 +14,25 @@ const PaymentForm = ({ order }) => {
   const elements = useElements();
   const navigate = useNavigate();
   useEffect(() => {
-    fetch(`http://localhost:5000/create-payment-intent?email=${user?.email}`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        authorization: `bearer ${localStorage.getItem("DealX-token")}`,
-      },
-      body: JSON.stringify(order),
-    })
+    fetch(
+      `https://assignment-12-server-black.vercel.app/create-payment-intent?email=${user?.email}`,
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          authorization: `bearer ${localStorage.getItem("DealX-token")}`,
+        },
+        body: JSON.stringify(order),
+      }
+    )
       .then((res) => res.json())
-      .then((data) => setClientSecret(data.clientSecret))
+      .then((data) => {
+        if (data.message) {
+          toast.error(data.message);
+        } else {
+          setClientSecret(data.clientSecret);
+        }
+      })
       .catch((er) => setPaymentError(er.message));
   }, [order, user]);
   const handleSubmit = async (e) => {
@@ -63,26 +72,35 @@ const PaymentForm = ({ order }) => {
             setTransactionId(paymentIntent.id);
 
             setSuccess("Your transition is successful");
-            fetch(`http://localhost:5000/payments?email=${user?.email}`, {
-              method: "POST",
-              headers: {
-                "content-type": "application/json",
-                authorization: `bearer ${localStorage.getItem("DealX-token")}`,
-              },
-              body: JSON.stringify({
-                transactionId: transactionId,
-                orderId: order._id,
-                productId: order.productId,
-                amount: order.price,
-                customer: order.buyerEmail,
-              }),
-            })
+            fetch(
+              `https://assignment-12-server-black.vercel.app/payments?email=${user?.email}`,
+              {
+                method: "POST",
+                headers: {
+                  "content-type": "application/json",
+                  authorization: `bearer ${localStorage.getItem(
+                    "DealX-token"
+                  )}`,
+                },
+                body: JSON.stringify({
+                  transactionId: transactionId,
+                  orderId: order._id,
+                  productId: order.productId,
+                  amount: order.price,
+                  customer: order.buyerEmail,
+                }),
+              }
+            )
               .then((res) => res.json())
               .then((data) => {
-                setSuccess("Your transition is successful");
+                if (data.message) {
+                  toast.error(data.message);
+                } else {
+                  setSuccess("Your transition is successful");
 
-                toast.success("Payment history saved !");
-                navigate("/dashboard/my-orders");
+                  toast.success("Payment history saved !");
+                  navigate("/dashboard/my-orders");
+                }
               });
           }
         }

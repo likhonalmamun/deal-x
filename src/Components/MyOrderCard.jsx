@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const MyOrderCard = ({ order }) => {
   return (
-    <div className="p-3 rounded-lg border-2 border-[#2b2d42] bg-[#edf2f4]">
+    <div className="p-3 rounded-lg border-2 w-full  border-[#2b2d42] bg-[#edf2f4]">
       <img className="h-52 rounded-lg w-full" src={order.productImg} alt="" />
       <div className="min-h-[160px] pt-4 flex flex-col border-t-2 border-[#ef233c] mt-1 justify-between">
         <div>

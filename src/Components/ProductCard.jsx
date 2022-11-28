@@ -49,32 +49,36 @@ const ProductCard = ({ product }) => {
           : "p-3 rounded-lg border-2 border-[#2b2d42] bg-[#edf2f4]"
       }
     >
-      <img className="h-96 rounded-lg w-full" src={product.img} alt="" />
+      <img className="sm:h-96 rounded-lg w-full" src={product.img} alt="" />
       <div className="flex flex-col border-t-2 border-[#ef233c] mt-1 justify-between">
         <div className="p-4 min-h-[195px]">
-          <div className="text-xl font-semibold  items-center mb-2 flex justify-between">
-            <h1 className="w-1/2">{product.name}</h1>
-            <h3 className="text-base w-1/2 text-right">
+          <div className="sm:text-xl font-semibold  items-center mb-2 sm:flex justify-between">
+            <h1 className="sm:w-1/2">{product.name}</h1>
+            <h3 className="sm:text-base  sm:w-1/2 sm:text-right">
               Condition : {product.condition}
             </h3>
           </div>
-          <p className="text-xs mb-1">Details : {product.description}</p>
-          <div className="font-bold text-lg flex items-center  justify-between text-[#d90429]">
+          <p className="text-xs mb-1 hidden  sm:block">
+            Details : {product.description}
+          </p>
+          <div className="sm:font-bold font-semibold text-lg sm:flex items-center  justify-between text-[#d90429]">
             <h1>Price : ₵{product.resellPrice}</h1>
-            <h1 className="w-1/2 text-right">
+            <h1 className="sm:w-1/2 sm:text-right">
               Original Price : ₵{product.originalPrice}
             </h1>
           </div>
-          <div className="font-semibold text-base  items-center flex justify-between text-[#8d99ae]">
+          <div className="font-semibold text-base  items-center sm:flex justify-between text-[#8d99ae]">
             <h1>Used : {product.yearsUsed} Years</h1>
-            <h1 className="w-1/2 text-right ">Location : {product.location}</h1>
+            <h1 className="sm:w-1/2 sm:text-right ">
+              Location : {product.location}
+            </h1>
           </div>
         </div>
 
-        <div className="p-2 pb-0 border-t-2 flex justify-between items-center border-[#ef233c]">
+        <div className="p-2 pb-0 border-t-2 sm:flex justify-between items-center border-[#ef233c]">
           <div className="flex items-center">
             <img
-              className="w-14 ring-2 ring-black  p-[2px] h-14 rounded-full"
+              className="sm:w-14 w-9 ring-2 ring-black  p-[2px] sm:h-14 h-9 rounded-full"
               src={seller?.image}
               alt=""
             />
@@ -96,7 +100,7 @@ const ProductCard = ({ product }) => {
                 htmlFor={`booking-modal-${product._id}`}
                 className={
                   role === "Buyer"
-                    ? "btn btn-sm  w-28 mb-2 uppercase font-semibold py-1 px-2 bg-black text-white"
+                    ? "btn btn-sm w-full sm:w-28 mb-2 uppercase font-semibold py-1 px-2 bg-black text-white"
                     : "hidden"
                 }
               >
@@ -104,7 +108,7 @@ const ProductCard = ({ product }) => {
               </label>
             ) : (
               <Link
-                className="btn btn-sm  w-28 mb-2 uppercase text-xs py-1 px-2 bg-black text-white"
+                className="btn btn-sm block w-full sm:w-28 mb-2 uppercase text-xs py-1 px-2 bg-black text-white"
                 to="/login"
               >
                 Login To Book
@@ -112,7 +116,7 @@ const ProductCard = ({ product }) => {
             )}
             <button
               onClick={reportProduct}
-              className="btn flex items-center gap-1 btn-sm  w-28 uppercase font-semibold py-1 px-2 bg-[#ef233c] text-white"
+              className="btn flex items-center gap-1 btn-sm  w-full sm:w-28 uppercase font-semibold py-1 px-2 bg-[#ef233c] text-white"
             >
               <span>report</span>{" "}
               <MdOutlineReportProblem className="text-base font-bold" />

@@ -20,9 +20,16 @@ const SellerRoute = ({ children }) => {
   }, [user]);
   if (loading) {
     return (
-      <h1 className="text-blue-500  font-bold text-3xl text-center mt-32">
-        Loading...
-      </h1>
+      <div className="flex justify-center items-center h-[200px]">
+        <div
+          className="radial-progress text-[#ef233c] mx-auto animate-spin"
+          style={{
+            "--value": "80",
+            "--size": "2rem",
+            "--thickness": "0.2rem",
+          }}
+        ></div>
+      </div>
     );
   }
   if (role === "Seller") {

@@ -26,7 +26,6 @@ const BookingModal = ({ product, setOpen }) => {
       method: "POST",
       headers: {
         "content-type": "application/json",
-        authorization: `bearer ${localStorage.getItem("DealX-token")}`,
       },
       body: JSON.stringify(booking),
     })
@@ -49,10 +48,10 @@ const BookingModal = ({ product, setOpen }) => {
         id={`booking-modal-${product._id}`}
         className="modal-toggle"
       />
-      <div className="modal">
+      <div className="modal p-2">
         <form
           onSubmit={bookProduct}
-          className="modal-box min-h-[520px] p-5 pb-10 bg-[#2b2d42] w-[500px] rounded-xl shadow-xl shadow-[#8d99ae] relative"
+          className="modal-box min-h-[520px] p-2 sm:p-5 pb-10 bg-[#2b2d42] w-[500px] rounded-xl shadow-xl shadow-[#8d99ae] relative"
           action=""
         >
           <label
@@ -132,7 +131,18 @@ const BookingModal = ({ product, setOpen }) => {
             type="submit"
             className="w-full py-2 mt-4 hover:bg-[#edf2f4] hover:text-[#d90429] duration-300 rounded-lg bg-[#ef233c] text-[#edf2f4] text-lg font-bold"
           >
-            {loading ? "Loading..." : "Book Now"}
+            {loading ? (
+              <div
+                className="radial-progress text-white mx-auto animate-spin"
+                style={{
+                  "--value": "80",
+                  "--size": "1.5rem",
+                  "--thickness": "0.2rem",
+                }}
+              ></div>
+            ) : (
+              "Book Now"
+            )}
           </button>
         </form>
       </div>

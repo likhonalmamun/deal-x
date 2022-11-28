@@ -8,7 +8,7 @@ const Notified = () => {
         Get notified from Deal
         <span className="text-[#ef233c]">X</span> .
       </h1>
-      <div className="mt-10 p-10 text-center bg-[#edf2f4]">
+      <div className="mt-10 p-5 sm:p-10 text-center bg-[#edf2f4]">
         <p className="text-lg font-semibold mb-3">
           Get update mails from Deal
           <span className="text-[#ef233c]">X</span>

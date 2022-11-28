@@ -10,7 +10,7 @@ const CategoryProducts = () => {
         All Products In this Category
       </h1>
 
-      <div className="px-3 grid grid-cols-2 gap-6">
+      <div className="px-3 grid sm:grid-cols-2 gap-6">
         {products.map((product) => (
           <ProductCard key={product._id} product={product}></ProductCard>
         ))}

@@ -59,14 +59,14 @@ const AddProduct = () => {
       });
   };
   return (
-    <div className="-z-10 m-20">
-      <div className=" p-5 bg-[#2b2d42] w-[630px] rounded-xl shadow-xl shadow-[#8d99ae]">
+    <div className="-z-10 m-1 sm:mt-10 flex justify-center items-center">
+      <div className=" p-2 sm:p-5 bg-[#2b2d42] w-[630px] rounded-xl shadow-xl shadow-[#8d99ae]">
         <form onSubmit={addProduct} action="">
           <h1 className="text-3xl mt-3 text-[#d90429] font-bold  text-center">
             Add A Product
           </h1>
           <div className="text-white pt-4">
-            <div className="flex gap-6">
+            <div className="sm:flex gap-6">
               <div className="w-full">
                 <label className="block mt-4 font-semibold mb-2" htmlFor="">
                   Product Category :
@@ -107,7 +107,7 @@ const AddProduct = () => {
               className="w-full text-[#d90429] outline-[#d90429] px-3 py-2 rounded-md bg-[#edf2f4]"
               type="text"
             />
-            <div className="flex justify-between gap-6">
+            <div className="sm:flex justify-between gap-6">
               <div className="w-full">
                 <label className="block mt-4 font-semibold mb-2" htmlFor="">
                   Original Price :
@@ -131,8 +131,8 @@ const AddProduct = () => {
                 />
               </div>
             </div>
-            <div className="flex gap-6">
-              <div className="w-1/5">
+            <div className="sm:flex gap-6">
+              <div className="sm:w-1/5">
                 <label className="block mt-4 font-semibold mb-2" htmlFor="">
                   Years of Use :
                 </label>
@@ -164,7 +164,7 @@ const AddProduct = () => {
               className="w-full text-[#d90429] outline-[#d90429] px-3 py-2 rounded-md bg-[#edf2f4]"
               type="text"
             />
-            <div className="flex gap-6">
+            <div className="sm:flex gap-6">
               <div className="w-full">
                 <label className="block mt-4 font-semibold mb-2" htmlFor="">
                   Contact Location :
@@ -193,7 +193,18 @@ const AddProduct = () => {
             type="submit"
             className="w-full py-2 my-7 hover:bg-[#edf2f4] hover:text-[#d90429] duration-300 rounded-lg bg-[#ef233c] text-[#edf2f4] text-lg font-bold"
           >
-            {loading ? "Loading..." : " Add Product"}
+            {loading ? (
+              <div
+              className="radial-progress text-white mx-auto animate-spin"
+              style={{
+                "--value": "80",
+                "--size": "1.5rem",
+                "--thickness": "0.2rem",
+              }}
+            ></div>
+            ) : (
+              " Add Product"
+            )}
           </button>
         </form>
       </div>

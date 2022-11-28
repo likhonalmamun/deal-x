@@ -85,8 +85,8 @@ const SignUp = () => {
       });
   };
   return (
-    <div className="min-h-[900px] flex items-center justify-center">
-      <div className="min-h-[700px] p-5 bg-[#2b2d42] w-[430px] rounded-xl shadow-xl shadow-[#8d99ae]">
+    <div className="sm:min-h-screen mt-14 sm:mt-0 p-2 sm:p-0 flex items-center justify-center">
+      <div className="sm:min-h-[520px] pb-10 sm:pb-2 p-2 sm:p-5 bg-[#2b2d42] w-[430px] rounded-xl shadow-xl shadow-[#8d99ae]">
         <form onSubmit={signUp} action="">
           <h1 className="text-3xl mt-3 text-[#d90429] font-bold  text-center">
             Sign Up
@@ -164,7 +164,18 @@ const SignUp = () => {
             type="submit"
             className="w-full py-2 mt-7 hover:bg-[#edf2f4] hover:text-[#d90429] duration-300 rounded-lg bg-[#ef233c] text-[#edf2f4] text-lg font-bold"
           >
-            {loading ? "Loading..." : " Sign Up"}
+            {loading ? (
+              <div
+                className="radial-progress text-white mx-auto animate-spin"
+                style={{
+                  "--value": "80",
+                  "--size": "2rem",
+                  "--thickness": "0.3rem",
+                }}
+              ></div>
+            ) : (
+              " Sign Up"
+            )}
           </button>
         </form>
         <h1 className="text-white text-lg text-center font-bold mt-3">OR</h1>

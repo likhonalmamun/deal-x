@@ -13,7 +13,7 @@ const Advertise = () => {
   return (
     <div className={`${products.length < 1 ? "hidden" : "block"}  mt-10`}>
       <h1 className="text-2xl  font-bold text-center"> Advertised products</h1>
-      <div className=" grid grid-cols-2 mt-16 gap-6 px-3">
+      <div className=" grid md:grid-cols-2 mt-16 gap-6 px-3">
         {products.map((product) => (
           <ProductCard key={product._id} product={product}></ProductCard>
         ))}

@@ -119,7 +119,9 @@ export const router = createBrowserRouter([
           </BuyerRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/products/${params.productId}`),
+          fetch(
+            `https://assignment-12-server-black.vercel.app/products/${params.productId}`
+          ),
       },
       {
         path: "/dashboard/reported-products",

@@ -22,9 +22,18 @@ const MyProducts = () => {
     },
   });
   return (
-    <div className="m-10 p-10 bg-[#edf2f4] ">
+    <div className="p-2 md:m-10 md:p-10 mt-10 pt-10 bg-[#edf2f4]  ">
       {isLoading ? (
-        <h1 className="text-3xl font-bold text-[#ef233c]">Loading....</h1>
+        <div className="flex justify-center items-center h-[200px]">
+          <div
+            className="radial-progress text-[#ef233c] mx-auto animate-spin"
+            style={{
+              "--value": "80",
+              "--size": "2rem",
+              "--thickness": "0.2rem",
+            }}
+          ></div>
+        </div>
       ) : (
         <h1 className="text-3xl font-bold text-[#ef233c]">
           {addedProducts.length > 0
@@ -32,7 +41,7 @@ const MyProducts = () => {
             : "No product is added"}
         </h1>
       )}
-      <div className="mt-10  grid grid-cols-2 gap-6">
+      <div className="mt-10  grid sm:grid-cols-2 gap-6">
         {addedProducts.map((product) => (
           <MyProductCard
             refetch={refetch}
