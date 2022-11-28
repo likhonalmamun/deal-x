@@ -1,7 +1,4 @@
 
-.App {
-  text-align: center;
-}
 .banner::after{
   content: "";
   position: absolute;

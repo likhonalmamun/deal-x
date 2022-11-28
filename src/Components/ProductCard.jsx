@@ -43,6 +43,7 @@ const ProductCard = ({ product }) => {
   };
   return (
     <div
+      // making sure that sold product not being displayed in ui
       className={
         product.status === "sold"
           ? "hidden"
@@ -98,6 +99,7 @@ const ProductCard = ({ product }) => {
             {user ? (
               <label
                 htmlFor={`booking-modal-${product._id}`}
+                // making sure that only buyer can book a product 
                 className={
                   role === "Buyer"
                     ? "btn btn-sm w-full sm:w-28 mb-2 uppercase font-semibold py-1 px-2 bg-black text-white"

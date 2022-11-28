@@ -195,7 +195,7 @@ const AddProduct = () => {
           >
             {loading ? (
               <div
-              className="radial-progress text-white mx-auto animate-spin"
+              className="radial-progress text-black mx-auto animate-spin"
               style={{
                 "--value": "80",
                 "--size": "1.5rem",

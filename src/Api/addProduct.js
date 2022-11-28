@@ -1,6 +1,4 @@
-import { useContext } from "react";
 import toast from "react-hot-toast";
-import { AuthContext } from "../Contexts/AuthProvider";
 export const addProductToDb = (newProduct, setLoading, email) => {
   fetch(
     `https://assignment-12-server-black.vercel.app/products?email=${email}`,

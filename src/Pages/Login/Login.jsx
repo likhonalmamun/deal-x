@@ -11,12 +11,12 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
+  // email password based login 
   const login = (e) => {
     e.preventDefault();
     setLoading(true);
     const email = e.target.email.value;
     const password = e.target.password.value;
-
     signInWithPass(email, password)
       .then((result) => {
         toast.success("Logged in successfully !");
@@ -29,7 +29,7 @@ const Login = () => {
         toast.error(er.message);
       });
   };
-
+//  login with google 
   const googleSignIn = () => {
     setLoading(true);
     googleLogin()
@@ -90,7 +90,7 @@ const Login = () => {
           >
             {loading ? (
               <div
-                className="radial-progress text-white mx-auto animate-spin"
+                className="radial-progress text-black mx-auto animate-spin"
                 style={{
                   "--value": "80",
                   "--size": "2rem",

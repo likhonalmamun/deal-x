@@ -6,10 +6,3 @@ module.exports = {
   },
   plugins: [require("daisyui")],
 };
-
-//       mytheme: {
-//       'primary': [#ef233c],
-//       'secondary': [#d90429],
-//       'lights': [#edf2f4],
-//       'darks': [#2b2d42],
-//       'accents': [#8d99ae],

@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext} from "react";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../Contexts/AuthProvider";
 const AllSellers = () => {

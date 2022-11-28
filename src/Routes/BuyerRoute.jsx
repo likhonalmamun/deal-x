@@ -11,7 +11,6 @@ const BuyerRoute = ({ children }) => {
     fetch(`https://assignment-12-server-black.vercel.app/users/${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data.role);
         setRole(data.role);
       })
       .catch((er) => {

@@ -6,18 +6,13 @@ import { saveUserAndGetToken } from "../../Api/saveUser";
 import { AuthContext } from "../../Contexts/AuthProvider";
 
 const SignUp = () => {
-  const {
-    createUser,
-    user,
-    updateUserProfile,
-    loading,
-    setLoading,
-    googleLogin,
-  } = useContext(AuthContext);
+  const { createUser, updateUserProfile, loading, setLoading, googleLogin } =
+    useContext(AuthContext);
   let [role, setRole] = useState("Buyer");
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
+  // email password based sign up
   const signUp = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -64,6 +59,7 @@ const SignUp = () => {
         setLoading(false);
       });
   };
+  // sign up with google
   const createUserWithGoogle = () => {
     googleLogin()
       .then((result) => {
@@ -75,7 +71,6 @@ const SignUp = () => {
           image: result.user.photoURL,
           verified: false,
         };
-        // console.log(newUser);
         saveUserAndGetToken(newUser);
         navigate(from);
       })
@@ -166,7 +161,7 @@ const SignUp = () => {
           >
             {loading ? (
               <div
-                className="radial-progress text-white mx-auto animate-spin"
+                className="radial-progress text-black mx-auto animate-spin"
                 style={{
                   "--value": "80",
                   "--size": "2rem",

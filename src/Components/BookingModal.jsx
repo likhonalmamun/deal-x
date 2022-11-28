@@ -55,6 +55,7 @@ const BookingModal = ({ product, setOpen }) => {
           action=""
         >
           <label
+            //dynamic modal id for opening correct modal
             htmlFor={`booking-modal-${product._id}`}
             className="btn btn-sm btn-circle absolute right-2 top-2"
           >
@@ -75,6 +76,7 @@ const BookingModal = ({ product, setOpen }) => {
               type="text"
             />
             <label className="block mt-4 font-semibold mb-2" htmlFor="">
+              {/* receiving price in cent */}
               Price : (₵)
             </label>
             <input
@@ -97,7 +99,7 @@ const BookingModal = ({ product, setOpen }) => {
               type="text"
             />
             <label className="block mt-4 font-semibold mb-2" htmlFor="">
-              Email : (₵)
+              Email :
             </label>
             <input
               name="email"
@@ -133,7 +135,7 @@ const BookingModal = ({ product, setOpen }) => {
           >
             {loading ? (
               <div
-                className="radial-progress text-white mx-auto animate-spin"
+                className="radial-progress text-black mx-auto animate-spin"
                 style={{
                   "--value": "80",
                   "--size": "1.5rem",

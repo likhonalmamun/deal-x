@@ -7,11 +7,11 @@ import { AuthContext } from "../Contexts/AuthProvider";
 import { FaBars, FaSignOutAlt } from "react-icons/fa";
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
-  // console.log(user);
   return (
     <div className="h-20 sm:px-7 flex justify-between items-center bg-[#2b2d42]">
       <div className="px-5 flex uppercase gap-2 items-center text-white py-2 rounded-xl w-20 text-xl font-bold">
         {user && (
+          // sidebar button of dashboard  for small devices
           <label
             htmlFor="sidebar"
             className="px-3 sm:hidden uppercase btn btn-sm  h-[37px] bg-[#edf2f4] py-0 duration-300 hover:text-[#edf2f4] text-[#d90429] rounded-md hover:bg-[#ef233c] text-xl  drawer-button"

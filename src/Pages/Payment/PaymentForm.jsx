@@ -39,10 +39,12 @@ const PaymentForm = ({ order }) => {
     e.preventDefault();
     setProcessing(true);
     if (!stripe || !elements) {
+      toast.error("Did not find stripe or elements !");
       return;
     } else {
       const card = elements.getElement(CardElement);
       if (card === null) {
+        toast.error("Could not find card !");
         return;
       } else {
         const { error, paymentMethod } = await stripe.createPaymentMethod({
@@ -70,8 +72,8 @@ const PaymentForm = ({ order }) => {
             return;
           } else {
             setTransactionId(paymentIntent.id);
-
             setSuccess("Your transition is successful");
+            // saving payment info in database
             fetch(
               `https://assignment-12-server-black.vercel.app/payments?email=${user?.email}`,
               {
@@ -112,7 +114,7 @@ const PaymentForm = ({ order }) => {
   return (
     <div>
       <form
-        className="w-[560px] my-6 p-10 rounded-xl border-2 border-gray-400 shadow-xl bg-[#f82c2c33]"
+        className="sm:w-[560px] w-[285px] my-6 p-2 sm:p-10 rounded-xl border-2 border-gray-400 shadow-xl bg-[#f82c2c33]"
         onSubmit={handleSubmit}
       >
         <CardElement

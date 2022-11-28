@@ -1,12 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext} from "react";
 import MyProductCard from "../../Components/MyProductCard";
 import { AuthContext } from "../../Contexts/AuthProvider";
 
 const MyProducts = () => {
   const { user } = useContext(AuthContext);
-  // const [addedProducts, setAddedProducts] = useState([]);
-
   const {
     data: addedProducts = [],
     isLoading,
