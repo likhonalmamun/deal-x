@@ -52,8 +52,4 @@ An admin can delete any buyer , user or reported product . He can verify any sel
 
 **_`Client site has been deployed to Firebase and server side is deployed to Vercel .`_**
 
-### adminEmail:`admin@saheb.com`
-
-### adminPassword:`adminsaheb`
-
 # Visit live site of DealX : [https://dealx-likhon.web.app/](https://dealx-likhon.web.app/)
