@@ -8,7 +8,7 @@ const Notified = () => {
         Get notified from Deal
         <span className="text-[#ef233c]">X</span> .
       </h1>
-      <div className="mt-10 p-5 sm:p-10 text-center bg-[#edf2f4]">
+      <div className="mt-10 p-5 sm:p-10 text-center bg-gradient-to-b from-rose-200 via-[#ffffff] to-[#edf2f4]">
         <p className="text-lg font-semibold mb-3">
           Get update mails from Deal
           <span className="text-[#ef233c]">X</span>
@@ -32,7 +32,7 @@ const Notified = () => {
           <br />
           <button
             type="submit"
-            className="btn btn-sm mt-3 bg-[#ef233c] border-0"
+            className="btn btn-sm mt-3 bg-gradient-to-b from-rose-600 via-rose-600  to-[#4e3838] border-0"
           >
             Submit
           </button>

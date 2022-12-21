@@ -30,7 +30,7 @@ const ReportedProducts = () => {
       .catch((er) => toast.error(er.message));
   };
   return (
-    <div className="sm:m-10  p-4 mt-10 sm:p-10 bg-[#edf2f4] ">
+    <div className="sm:m-10  p-4 mt-10 sm:p-10 bg-gradient-to-r from-rose-200 via- to-[#edf2f4] ">
       {isLoading ? (
         <div className="flex justify-center items-center h-[200px]">
           <div
@@ -69,7 +69,7 @@ const ReportedProducts = () => {
             <div>
               <button
                 onClick={() => deleteProduct(product._id)}
-                className="btn bg-red-500 border-0 mx-2 btn-sm"
+                className="btn hover:bg-gradient-to-r duration-300 hover:scale-105 bg-gradient-to-b from-rose-600 via-rose-600  to-[#4e3838]  border-0 mx-2 btn-sm"
               >
                 Delete
               </button>

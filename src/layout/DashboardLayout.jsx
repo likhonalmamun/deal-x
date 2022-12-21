@@ -43,7 +43,7 @@ const DashboardLayout = () => {
               ></div>
             </div>
           ) : (
-            <ul className="menu p-4 w-80 bg-[#edf2f4]  text-lg text-[#d90429] font-semibold">
+            <ul className="menu p-4 w-80 bg-gradient-to-r from-[#ffffff]  to-[#e1ebef]  text-lg text-[#d90429] font-semibold">
               {user && role === "Buyer" && (
                 <li>
                   <Link to="/dashboard/my-orders">My Orders</Link>

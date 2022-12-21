@@ -34,7 +34,7 @@ const Header = () => {
             />
             <button
               onClick={() => logOut()}
-              className="px-3 uppercase hidden sm:inline-block flex items-center gap-1 duration-300 text-white hover:bg-[#edf2f4] hover:text-[#d90429] py-2 rounded-sm bg-[#ef233c] text-base font-semibold"
+              className="duration-300 px-3 uppercase hidden bg-gradient-to-r from-[#ef233c] to-[#000000] shadow-md sm:flex items-center gap-1  text-white hover:from-[#000000] hover:to-[#ef233c]  py-2 rounded-sm bg-[#ef233c] text-base font-semibold"
             >
               <span>Logout</span>{" "}
               <FaSignOutAlt className="inline"></FaSignOutAlt>
@@ -44,13 +44,13 @@ const Header = () => {
           <div className="text-[#edf2f4] hidden sm:block">
             <Link
               to="/login"
-              className="px-3 uppercase  duration-300 hover:bg-[#edf2f4] hover:text-[#d90429] py-2 rounded-sm bg-[#ef233c] text-base font-semibold"
+              className="px-3 uppercase  duration-300 hover:bg-gradient-to-r py-2 rounded-sm bg-gradient-to-b from-rose-500 via-rose-600  to-rose-900 text-base font-semibold"
             >
               Login
             </Link>
             <Link
               to="/sign-up"
-              className="px-3 uppercase  mx-2 bg-[#edf2f4] py-2 duration-300 hover:text-[#edf2f4] text-[#d90429] rounded-sm hover:bg-[#ef233c] text-base font-semibold"
+              className="px-3 uppercase  mx-2 hover:bg-gradient-to-r bg-[#edf2f4] py-2 duration-500 hover:text-[#edf2f4] from-rose-500 via-rose-600  to-rose-900 text-[#d90429] rounded-sm hover:bg-[#ef233c] text-base font-semibold"
             >
               Sign Up
             </Link>
@@ -59,7 +59,7 @@ const Header = () => {
         <div className="inline relative max-w-56 text-right">
           <Menu as="div" className=" text-left">
             <div className="flex justify-end">
-              <Menu.Button className="px-3 uppercase  mx-2 h-[37px] bg-[#edf2f4] py-0 duration-300 hover:text-[#edf2f4] text-[#d90429] rounded-sm hover:bg-[#ef233c] text-xl ">
+              <Menu.Button className="px-3 uppercase hover:bg-gradient-to-r mx-2 h-[37px] bg-[#edf2f4] py-0 duration-300 text-[#ffffff] rounded-sm bg-gradient-to-l from-rose-500 via-rose-600  to-rose-900 text-xl ">
                 <FaBars></FaBars>
               </Menu.Button>
             </div>
@@ -72,7 +72,7 @@ const Header = () => {
               leaveFrom="transform opacity-100 scale-100"
               leaveTo="transform opacity-0 scale-95"
             >
-              <Menu.Items className="absolute z-40 right-0 mt-2 w-56 origin-top-right divide-y divide-[#ef233c] rounded-md bg-[#edf2f4] shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+              <Menu.Items className="absolute z-40 right-0 mt-2 w-56 origin-top-right divide-y divide-[#ef233c] rounded-md bg-gradient-to-b from-rose-100 to-[#dde0e1] shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                 <div className="px-1 py-1 ">
                   <Menu.Item>
                     {({ active }) => (
@@ -80,7 +80,7 @@ const Header = () => {
                         to="/"
                         className={`${
                           active
-                            ? "bg-[#ef233c] text-[#edf2f4]"
+                            ? "bg-gradient-to-r from-rose-600 via-rose-600  to-[#4e3838] text-[#edf2f4]"
                             : "text-[#d90429]"
                         } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                       >
@@ -95,7 +95,7 @@ const Header = () => {
                           to="/dashboard"
                           className={`${
                             active
-                              ? "bg-[#ef233c] text-[#edf2f4]"
+                              ? "bg-gradient-to-r from-rose-600 via-rose-600  to-[#4e3838] text-[#edf2f4]"
                               : "text-[#d90429]"
                           } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                         >
@@ -110,7 +110,7 @@ const Header = () => {
                         to="/blogs"
                         className={`${
                           active
-                            ? "bg-[#ef233c] text-[#edf2f4]"
+                            ? "bg-gradient-to-r from-rose-600 via-rose-600  to-[#4e3838] text-[#edf2f4]"
                             : "text-[#d90429]"
                         } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                       >
@@ -125,7 +125,7 @@ const Header = () => {
                           onClick={() => logOut()}
                           className={`${
                             active
-                              ? "bg-[#ef233c] text-[#edf2f4]"
+                              ? "bg-gradient-to-r from-rose-600 via-rose-600  to-[#4e3838] text-[#edf2f4]"
                               : "text-[#d90429]"
                           } group flex w-full items-center rounded-md px-2 py-2 text-sm `}
                         >
@@ -144,7 +144,7 @@ const Header = () => {
                             to="/login"
                             className={`${
                               active
-                                ? "bg-[#ef233c] text-[#edf2f4]"
+                                ? "bg-gradient-to-r from-rose-600 via-rose-600  to-[#4e3838] text-[#edf2f4]"
                                 : "text-[#d90429]"
                             } group flex w-full items-center rounded-md sm:hidden px-2 py-2 text-sm`}
                           >
@@ -158,7 +158,7 @@ const Header = () => {
                             to="/sign-up"
                             className={`${
                               active
-                                ? "bg-[#ef233c] text-[#edf2f4]"
+                                ? "bg-gradient-to-r from-rose-600 via-rose-600  to-[#4e3838] text-[#edf2f4]"
                                 : "text-[#d90429]"
                             } group flex w-full items-center rounded-md px-2 py-2 sm:hidden text-sm`}
                           >

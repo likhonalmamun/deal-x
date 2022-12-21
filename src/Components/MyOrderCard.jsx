@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const MyOrderCard = ({ order }) => {
   return (
-    <div className="p-3 rounded-lg border-2 w-full  border-[#2b2d42] bg-[#edf2f4]">
+    <div className="p-3 rounded-lg border-2 w-full  border-[#2b2d42] bg-gradient-to-r from-rose-200 via-[#edf2f4]">
       <img className="h-52 rounded-lg w-full" src={order.productImg} alt="" />
       <div className="min-h-[160px] pt-4 flex flex-col border-t-2 border-[#ef233c] mt-1 justify-between">
         <div>
@@ -18,7 +18,7 @@ const MyOrderCard = ({ order }) => {
           <Link
             to={`/dashboard/payment/${order._id}`}
             disabled={order.paid}
-            className="btn btn-sm w-full mb-2 uppercase font-semibold py-1 px-2 bg-[#ef233c] text-white"
+            className="btn btn-sm w-full mb-2 uppercase font-semibold py-1 px-2 bg-gradient-to-r from-rose-600 via-rose-600  to-[#4e3838] text-white"
           >
             {order.paid ? "Paid" : "Pay now"}
           </Link>

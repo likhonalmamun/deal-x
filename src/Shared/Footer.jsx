@@ -9,25 +9,28 @@ import {
 } from "react-icons/fa";
 const Footer = () => {
   return (
-    <footer className="text-center mt-20 bg-[#edf2f4] text-white">
+    <footer className="text-center mt-20 bg-gradient-to-b from-rose-200 via-[#edf2f4] to-[#ffffff]">
       <div className="container text-2xl p-4 pt-9">
-        <div className="flex justify-center items-center gap-7 flex-wrap mb-9">
-          <a href="#!" className=" text-gray-800">
+        <div className="flex justify-center items-center gap-12 mb-9">
+          <a
+            href="https://www.facebook.com/likhon.al.mamun.4321"
+            className=" text-gray-800"
+          >
             <FaFacebook></FaFacebook>
           </a>
-          <a href="#!" className="text-gray-800">
-            <FaTwitter></FaTwitter>
-          </a>
-          <a href="#!" className="text-gray-800">
-            <FaGoogle></FaGoogle>
-          </a>
-          <a href="#!" className="text-gray-800">
+          <a
+            href="https://www.instagram.com/likhon_al_mamun/"
+            className="text-gray-800"
+          >
             <FaInstagram></FaInstagram>
           </a>
-          <a href="#!" className="text-gray-800">
+          <a
+            href="https://www.linkedin.com/in/md-likhon-ali/"
+            className="text-gray-800"
+          >
             <FaLinkedin></FaLinkedin>
           </a>
-          <a href="#!" className="text-gray-800">
+          <a href="https://github.com/likhonalmamun" className="text-gray-800">
             <FaGithub></FaGithub>
           </a>
         </div>

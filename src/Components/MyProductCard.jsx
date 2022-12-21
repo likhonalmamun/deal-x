@@ -42,7 +42,7 @@ const MyProductCard = ({ product, refetch }) => {
       .catch((er) => toast.error(er.message));
   };
   return (
-    <div className="p-3 rounded-lg border-2 border-[#2b2d42] bg-[#edf2f4]">
+    <div className="p-3 rounded-lg border-2 border-[#2b2d42] bg-gradient-to-r from-rose-200 via-[#edf2f4]">
       <img className="h-52 rounded-lg w-full" src={product.img} alt="" />
       <div className="min-h-[160px] pt-4 flex flex-col border-t-2 border-[#ef233c] mt-1 justify-between">
         <div>
@@ -63,14 +63,14 @@ const MyProductCard = ({ product, refetch }) => {
             onClick={() => {
               deleteProduct(product._id);
             }}
-            className="btn btn-sm flex-1 mb-2 uppercase font-semibold py-1 px-2 bg-[#ef233c] text-white"
+            className="btn btn-sm flex-1 mb-2 uppercase font-semibold py-1 px-2 hover:bg-gradient-to-b bg-gradient-to-r from-rose-600 via-rose-600  to-[#4e3838] text-white"
           >
             Delete
           </button>
           {product.status !== "sold" && product.advertised !== true && (
             <button
               onClick={advertise}
-              className="btn btn-sm flex-1 mb-2 uppercase font-semibold py-1 px-2 bg-[#ef233c] text-white"
+              className="btn btn-sm flex-1 mb-2 uppercase font-semibold py-1 px-2 hover:bg-gradient-to-b  bg-gradient-to-r from-rose-600 via-rose-600  to-[#4e3838] text-white"
             >
               Advertise
             </button>

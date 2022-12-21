@@ -4,11 +4,11 @@ const Blogs = () => {
   return (
     <div className="sm:my-5 my-3 md:my-10 sm:p-5 p-3 md:p-10 ">
       <div className="sm:my-5 my-3 md:my-10">
-        <h1 className="bg-[#2b2d42] py-4 px-3 text-2xl font-semibold text-white">
+        <h1 className="bg-gradient-to-b from-rose-700  to-[#000000] py-4 px-3 text-2xl font-semibold text-white">
           <span className="text-[#d90429] font-bold">Q1 : </span> What are the
           different ways to manage a state in a React application?
         </h1>
-        <p className="py-5 px-5 italic bg-[#edf2f4] border-2 border-[#2b2d42] rounded-br-[50px]">
+        <p className="py-5 px-5 italic bg-gradient-to-r from-rose-200  to-[#edf2f4] border-2 border-[#2b2d42] rounded-br-[50px]">
           <span className="font-bold">ANS : </span>
           There is many ways in React App for managing states .
           <li>
@@ -43,11 +43,11 @@ const Blogs = () => {
         </p>
       </div>
       <div className="sm:my-5 my-3 md:my-10">
-        <h1 className="bg-[#2b2d42] rounded-tl-[40px] py-4 px-5 text-2xl font-semibold text-white">
+        <h1 className="bg-gradient-to-b from-rose-700  to-[#000000] rounded-tl-[40px] py-4 px-5 text-2xl font-semibold text-white">
           <span className="text-[#d90429] font-bold">Q2 : </span> How does
           prototypical inheritance work?
         </h1>
-        <p className="py-5 px-5 italic bg-[#edf2f4] border-2 border-[#2b2d42] ">
+        <p className="py-5 px-5 italic bg-gradient-to-l from-rose-200 to-[#edf2f4] border-2 border-[#2b2d42] ">
           <span className="font-bold">ANS : </span>
           There is a hidden property in every JS object named [[prototype]]. It
           contains all the methods and properties of that object . Prototypical
@@ -63,11 +63,11 @@ const Blogs = () => {
         </p>
       </div>
       <div className="sm:my-5 my-3 md:my-10">
-        <h1 className="bg-[#2b2d42] py-4 px-3 text-2xl font-semibold text-white">
+        <h1 className="bg-gradient-to-b from-rose-700  to-[#000000] py-4 px-3 text-2xl font-semibold text-white">
           <span className="text-[#d90429] font-bold">Q3 : </span> What is a unit
           test? Why should we write unit tests?
         </h1>
-        <p className="py-5 px-5 italic bg-[#edf2f4] border-2 border-[#2b2d42] rounded-br-[50px]">
+        <p className="py-5 px-5 italic bg-gradient-to-r from-rose-200  to-[#edf2f4] border-2 border-[#2b2d42] rounded-br-[50px]">
           <span className="font-bold">ANS : </span>
           Unit test is a method of testing smallest components(It can be
           function , object , part of code or any method ) of any software
@@ -83,11 +83,11 @@ const Blogs = () => {
         </p>
       </div>
       <div className="sm:my-5 my-3 md:my-10">
-        <h1 className="bg-[#2b2d42] rounded-tl-[40px] py-4 px-5 text-2xl font-semibold text-white">
+        <h1 className="bg-gradient-to-b from-rose-700  to-[#000000] rounded-tl-[40px] py-4 px-5 text-2xl font-semibold text-white">
           <span className="text-[#d90429] font-bold">Q4 : </span> React vs.
           Angular vs. Vue?
         </h1>
-        <p className="py-5 px-5 italic bg-[#edf2f4] border-2 border-[#2b2d42] ">
+        <p className="py-5 px-5 italic bg-gradient-to-l from-rose-200  to-[#edf2f4] border-2 border-[#2b2d42] ">
           <span className="font-bold">ANS : </span> <br />
           React.js : React is a frond end framework library of javascript which
           is developed by facebook and initially published in 2013 . It is easy

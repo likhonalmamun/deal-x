@@ -47,7 +47,7 @@ const ProductCard = ({ product }) => {
       className={
         product.status === "sold"
           ? "hidden"
-          : "p-3 rounded-lg border-2 border-[#2b2d42] bg-[#edf2f4]"
+          : "p-3 rounded-lg border-2 border-[#2b2d42] bg-gradient-to-r from-rose-200 via-[#ffffff] to-[#edf2f4]"
       }
     >
       <img className="sm:h-96 rounded-lg w-full" src={product.img} alt="" />
@@ -99,7 +99,7 @@ const ProductCard = ({ product }) => {
             {user ? (
               <label
                 htmlFor={`booking-modal-${product._id}`}
-                // making sure that only buyer can book a product 
+                // making sure that only buyer can book a product
                 className={
                   role === "Buyer"
                     ? "btn btn-sm w-full sm:w-28 mb-2 uppercase font-semibold py-1 px-2 bg-black text-white"
@@ -118,7 +118,7 @@ const ProductCard = ({ product }) => {
             )}
             <button
               onClick={reportProduct}
-              className="btn flex items-center gap-1 btn-sm  w-full sm:w-28 uppercase font-semibold py-1 px-2 bg-[#ef233c] text-white"
+              className="btn flex items-center gap-1 btn-sm  w-full sm:w-28 uppercase font-semibold py-1 px-2 hover:bg-gradient-to-t bg-gradient-to-r from-rose-600 via-rose-600  to-[#4e3838] text-white"
             >
               <span>report</span>{" "}
               <MdOutlineReportProblem className="text-base font-bold" />
